@@ -1,6 +1,6 @@
-package org.khmerslide.entities;
+package org.khmerslide.model;
 
-public class Document {
+public class InputDocument {
 	private int doc_id;
 	private String doc_title;
 	private String uploaded_date;
@@ -14,7 +14,6 @@ public class Document {
 	private int user_id;
 	private int  cat_id;
 	private String thumbnail;
-	
 	public int getDoc_id() {
 		return doc_id;
 	}
@@ -93,4 +92,6 @@ public class Document {
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
+	
+	
 }

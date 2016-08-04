@@ -1,11 +1,4 @@
-<%-- <%@page import="com.security.ksp.model.User"%>
- --%><%@page import="com.basic.authentication.api.model.User"%>
-<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@page import="org.springframework.security.core.Authentication"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%-- <%@taglib prefix='sec' uri="http://www.springframework.org/security/tags" %>
- --%><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -18,13 +11,13 @@
              <label><a href="#">ADMIN</label> 
          </sec:authorize>  --%>
         
-        <%
+      <%--   <%
                                         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
                                 		User user = (User)authentication.getPrincipal();
                                 		out.print("____________adminID " +user.getId());
                                 		out.print("____________adminID " +user.getUsername());
                                 		out.print("____________adminID " +user.getRoles().get(0).getRole_name() +"<br/>"); 
-                                        %>
+                                        %> --%>
 <%--                                         <sec:authorize access="isAuthenticated()">Logout</sec:authorize> --%>
 <%--                                        <sec:authorize access="isAuthenticated()">Logout</sec:authorize>  --%>
                                         <%-- <sec:authorize access="hasAnyRole('ADMIN' , 'USER')">ROLE ADMIN</sec:authorize>

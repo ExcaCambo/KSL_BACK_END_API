@@ -1,6 +1,8 @@
-package org.khmerslide.entities;
+package org.khmerslide.model;
 
-public class User {
+
+
+public class InputUser {
 	private int user_id;
 	private String user_name;
 	private String gender;

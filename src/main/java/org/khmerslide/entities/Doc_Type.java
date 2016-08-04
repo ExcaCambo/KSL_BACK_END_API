@@ -1,16 +1,16 @@
 package org.khmerslide.entities;
 
 public class Doc_Type {
-	private int doc_type;
+	private int doc_type_id;
 	private String doc_name;
 	private int status;
 	private String description;
 	
 	public int getDoc_type() {
-		return doc_type;
+		return doc_type_id;
 	}
-	public void setDoc_type(int doc_type) {
-		this.doc_type = doc_type;
+	public void setDoc_type(int doc_type_id) {
+		this.doc_type_id = doc_type_id;
 	}
 	public String getDoc_name() {
 		return doc_name;

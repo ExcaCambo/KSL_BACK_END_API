@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.khmerslide.entities.User;
-import org.khmerslide.entities.User_Type;
-import org.khmerslide.model.InputUser;
-import org.khmerslide.services.UserService;
+import org.khmerslide.entities.Document;
+import org.khmerslide.model.InputDocument;
+import org.khmerslide.services.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,18 +18,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(value="api/user")
-public class UserController {
+@RequestMapping(value="api/docs")
+public class DocumentController {
+		
 	@Autowired
-	private UserService  userService;
+	private DocumentService documentService;
+	
 	@ResponseBody
 	@RequestMapping(method=RequestMethod.GET,headers="Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> getUser(){
+	public ResponseEntity<Map<String, Object>> getDocument(){
 		Map<String , Object> map = new HashMap<String , Object>();
 		try{
-			ArrayList<User> users = userService.getUser();
-			if(!users.isEmpty()){
-				map.put("DATA", users);
+			ArrayList<Document> docs = documentService.getDocument();
+			if(!docs.isEmpty()){
+				map.put("DATA", docs);
 				map.put("STATUS", true);
 				map.put("MESSAGE", "DATA FOUND!");
 			}else{
@@ -46,29 +47,28 @@ public class UserController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, headers="Accept=Application/json")
-	public ResponseEntity<Map<String , Object>> addUser(@RequestBody InputUser user){
+	public ResponseEntity<Map<String , Object>> addDocument(@RequestBody InputDocument document){
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
-			User u = new User();
-			u.setUser_id(user.getUser_id());
-			u.setUser_name(user.getUser_name());
-			u.setGender(user.getGender());
-			u.setEmail(user.getEmail());
-			u.setPassword(user.getPassword());
-			u.setRegistered_date(user.getRegistered_date());
-			u.setPhoto(user.getPhoto());
-			u.setDescription(user.getDescription());
-			u.setStatus(user.getStatus());
-			u.setRole_id(user.getRole_id());
-			/*User_Type  ut = new User_Type();
-					ut.setRole_id(user.getRole_id());
-			u.setRole_id(ut);*/
-			
-			if(userService.addUser(u)){
-				map.put("MESSAGE", "ADD USER");
+			Document doc = new Document();
+			doc.setDoc_id(document.getDoc_id());
+			doc.setDoc_title(document.getDoc_title());
+			doc.setUploaded_date(document.getUploaded_date());
+			doc.setUrl(document.getUrl());
+			doc.setLiked(document.getLiked());
+			doc.setShared(document.getShared());
+			doc.setViewed(document.getViewed());
+			doc.setDescription(document.getDescription());
+			doc.setStatus(document.getStatus());
+			doc.setDoc_type_id(document.getDoc_type_id());
+			doc.setUser_id(document.getUser_id());
+			doc.setCat_id(document.getCat_id());
+			doc.setThumbnail(document.getThumbnail());
+			if(documentService.addDocument(doc)){
+				map.put("MESSAGE", "ADD DOCUMENT");
 				map.put("STATUS", true);
 			}else{
-				map.put("MESSAGE", "NOT ADD USER");
+				map.put("MESSAGE", "NOT ADD DOCUMENT");
 				map.put("STATUS", false);
 			}
 		}catch(Exception e){
@@ -81,14 +81,14 @@ public class UserController {
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT, headers = "Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> updateUser(@RequestBody User user){
+	public ResponseEntity<Map<String, Object>> updateDocument(@RequestBody Document document){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
-			if(userService.updateUser(user)){
-				map.put("MESSAGE", "USER UPDATE");
+			if(documentService.updateDocument(document)){
+				map.put("MESSAGE", "UPDATE DOCUMENT");
 				map.put("STATUS", true);
 			}else{
-				map.put("MESSAGE", "USER NOT UPDATE");
+				map.put("MESSAGE", "NOT UPDATE DOCUMENT");
 				map.put("STATUS", false);
 			}
 		}catch(Exception e){
@@ -99,15 +99,17 @@ public class UserController {
 		return new ResponseEntity<Map<String,Object>>(map , HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/{id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
-	public ResponseEntity<Map<String , Object>> deleteUser(@PathVariable("id") int id){
+	
+	
+	@RequestMapping(value="/{doc_id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
+	public ResponseEntity<Map<String , Object>> deleteUser(@PathVariable("doc_id") int doc_id){
 		Map<String , Object> map = new HashMap<String,Object>();
 		try{
-			if(userService.deleteUser(id)){
-				map.put("MESSAGE", "USER DELETE");
+			if(documentService.deleteDocument(doc_id)){
+				map.put("MESSAGE", "DOCUMENT DELETE");
 				map.put("STATUS" , true);
 			}else{
-				map.put("MESSAGE", "USER NOT DELETE");
+				map.put("MESSAGE", "DOCUMENT NOT DELETE");
 				map.put("STATUS" , false);
 			}
 		}catch(Exception e){
@@ -118,5 +120,4 @@ public class UserController {
 		return new ResponseEntity<Map<String,Object>>(map , HttpStatus.OK);
 	}
 	
-}	
-
+}

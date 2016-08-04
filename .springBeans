@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:org.khmerslide.KslBackEndApiApplication</config>
+		<config>java:org.khmerslide.repository.KslBackEndApiApplication</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

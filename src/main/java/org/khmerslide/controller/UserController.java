@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(value="api/user")
+@RequestMapping("/api/user")
 public class UserController {
 	@Autowired
 	private UserService  userService;

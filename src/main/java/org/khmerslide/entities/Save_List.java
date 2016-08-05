@@ -5,7 +5,22 @@ public class Save_List {
 	private String sl_name;
 	private String saved_date;
 	private int status;
-	private User  user_id;
+	private int  user_id;
+	private int  doc_id;
+	private String description;
+	
+	public int getDoc_id() {
+		return doc_id;
+	}
+	public void setDoc_id(int doc_id) {
+		this.doc_id = doc_id;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public int getSl_id() {
 		return sl_id;
 	}
@@ -30,10 +45,10 @@ public class Save_List {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public User getUser_id() {
+	public int getUser_id() {
 		return user_id;
 	}
-	public void setUser_id(User user_id) {
+	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
 	

@@ -6,7 +6,7 @@ public class Category {
 	private String cat_name;
 	private String created_date;
 	private int status;
-	private User  user_id;
+	private int  user_id;
 	private String description;
 	public int getCat_id() {
 		return cat_id;
@@ -38,11 +38,11 @@ public class Category {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public User getUser_id() {
+	public int getUser_id() {
 		return user_id;
 	}
-	public void setUser_id(User user_id) {
-		this.user_id = user_id;
+	public void setUser_id(int user_id) {
+		this.user_id =user_id;
 	}
 	public String getDescription() {
 		return description;

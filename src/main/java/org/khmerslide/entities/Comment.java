@@ -2,23 +2,22 @@ package org.khmerslide.entities;
 
 public class Comment {
 	private int cmt_id;
-	private String cmt_name;
+	private String cmt_text;
 	private String cmt_date;
 	private int status;
-	private User user_id;
-	private Document  doc_id;
-	private String description;
+	private int user_id;
+	private int  doc_id;
 	public int getCmt_id() {
 		return cmt_id;
 	}
 	public void setCmt_id(int cmt_id) {
 		this.cmt_id = cmt_id;
 	}
-	public String getCmt_name() {
-		return cmt_name;
+	public String getCmt_text() {
+		return cmt_text;
 	}
-	public void setCmt_name(String cmt_name) {
-		this.cmt_name = cmt_name;
+	public void setCmt_text(String cmt_text) {
+		this.cmt_text = cmt_text;
 	}
 	public String getCmt_date() {
 		return cmt_date;
@@ -32,22 +31,16 @@ public class Comment {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public User getUser_id() {
+	public int getUser_id() {
 		return user_id;
 	}
-	public void setUser_id(User user_id) {
+	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
-	public Document getDoc_id() {
+	public int getDoc_id() {
 		return doc_id;
 	}
-	public void setDoc_id(Document doc_id) {
+	public void setDoc_id(int doc_id) {
 		this.doc_id = doc_id;
 	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}	
 }

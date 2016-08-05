@@ -8,6 +8,7 @@ public class Category {
 	private int status;
 	private int  user_id;
 	private String description;
+	
 	public int getCat_id() {
 		return cat_id;
 	}
@@ -42,7 +43,7 @@ public class Category {
 		return user_id;
 	}
 	public void setUser_id(int user_id) {
-		this.user_id =user_id;
+		this.user_id = user_id;
 	}
 	public String getDescription() {
 		return description;
@@ -50,5 +51,6 @@ public class Category {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 	
 }

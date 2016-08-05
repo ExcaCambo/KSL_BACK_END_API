@@ -38,9 +38,10 @@ public interface CategoryRepository {
 			+ "#{created_date},"
 			+ "#{status},"
 			+ "#{user_id},"
-			+ "#{desciption}";
+			+ "#{description})";
 	@Insert(A_C)
 	public boolean addCategory(Category category);
+	
 	String U_C="UPDATE ksl_category SET "
 			+ "parent_id=#{parent_id},"
 			+ "cat_name=#{cat_name},"
@@ -53,7 +54,7 @@ public interface CategoryRepository {
 	@Update(U_C)
 	public boolean updateCategory(Category category);
 	
-	String D_C="DELETE FROM ksl_category"
+	String D_C="DELETE FROM ksl_category "
 			+ "WHERE "
 			+ "cat_id=#{cat_id}";
 	@Delete(D_C)

@@ -60,7 +60,8 @@ public interface SaveListRepository {
 				+ "#{saved_date},"
 				+ "#{status},"
 				+ "#{user_id},"
-				+ "#{doc_id})";
+				+ "#{doc_id},"
+				+ "#{description})";
 	@Insert(A_SL)
 	public boolean addSaveList(Save_List savelist);
 	String U_SL="UPDATE ksl_save_list SET "

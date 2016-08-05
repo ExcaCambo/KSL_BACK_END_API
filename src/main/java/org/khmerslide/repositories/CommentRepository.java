@@ -30,20 +30,20 @@ public interface CommentRepository {
 			+ "status,"
 			+ "user_id,"
 			+ "doc_id) "
-			+ "VLAUES("
-			+ "cmt_id=#{cmt_id},"
-			+ "cmt_text=#{cmt_text},"
-			+ "cmt_date=#{cmt_date},"
-			+ "status=#{status},"
-			+ "user_id=#{user_id},"
-			+ "doc_id=#{doc_id})";
+			+ "VALUES("
+			+ "#{cmt_id},"
+			+ "#{cmt_text},"
+			+ "#{cmt_date},"
+			+ "#{status},"
+			+ "#{user_id},"
+			+ "#{doc_id})";
 	@Insert(A_CM)
 	public boolean addComment(Comment comment);
 	
 	String U_CM="UPDATE ksl_comment SET "
 			+ "cmt_text=#{cmt_text},"
 			+ "cmt_date=#{cmt_date},"
-			+ "status=#{stutus},"
+			+ "status=#{status},"
 			+ "user_id=#{user_id},"
 			+ "doc_id=#{doc_id} "
 			+ "WHERE "

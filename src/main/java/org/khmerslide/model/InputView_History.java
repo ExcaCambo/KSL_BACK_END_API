@@ -1,11 +1,15 @@
-package org.khmerslide.entities;
+package org.khmerslide.model;
 
-public class View_History {
+import org.khmerslide.entities.Document;
+import org.khmerslide.entities.User;
+
+public class InputView_History {
 	private int vh_id;
 	private String added_date;
 	private int  user_id;
 	private int  doc_id;
 	private String description;
+	
 	
 	public int getVh_id() {
 		return vh_id;

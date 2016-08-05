@@ -10,8 +10,15 @@ public class User {
 	private String photo;
 	private String description;
 	private int status;
-	private int role_id;
+	/*private int role_id;*/
+	private User_Type role_id;
 	
+	public User_Type getRole_id() {
+		return role_id;
+	}
+	public void setRole_id(User_Type role_id) {
+		this.role_id = role_id;
+	}
 	public int getUser_id() {
 		return user_id;
 	}
@@ -66,11 +73,11 @@ public class User {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public int getRole_id() {
+	/*public int getRole_id() {
 		return role_id;
 	}
 	public void setRole_id(int role_id) {
 		this.role_id = role_id;
 	}
-	
+	*/
 }

@@ -24,8 +24,8 @@ public interface UserRepositories {
 				+"U.status,"
 				+"U.role_id "
 				+"FROM "
-				+"ksl_user U ";
-				/*+"INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id";*/
+				+"ksl_user U "
+				+"INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id";
 	@Select(G_USER)
 	public ArrayList<User> getUser();
 	
@@ -38,7 +38,8 @@ public interface UserRepositories {
 					+ "password,"
 					+ "registered_date,"
 					+ "photo,"
-					+ "description)"
+					+ "description,"
+					+ "role_id) "
 					+ "VALUES("
 					+ "#{user_id},"
 					+ "#{user_name},"
@@ -47,7 +48,8 @@ public interface UserRepositories {
 					+ "#{password},"
 					+ "#{registered_date},"
 					+ "#{photo},"
-					+ "#{description})"; 
+					+ "#{description},"
+					+ "#{role_id.role_id})"; 
 	@Insert(A_USER)
 	public boolean addUser(User user);
 

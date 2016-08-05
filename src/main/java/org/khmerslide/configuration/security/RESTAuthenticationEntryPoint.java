@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
 @Component("RESTAuthenticationEntryPoint")
 public class RESTAuthenticationEntryPoint implements AuthenticationEntryPoint{
 
-	forward to page
+
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
 			throws IOException, ServletException {
 		request.setAttribute("msg", authException.getMessage());
-		request.getRequestDispatcher("/401").forward(request, response);
+		request.getRequestDispatcher("404").forward(request, response);
 		
 	}
 	

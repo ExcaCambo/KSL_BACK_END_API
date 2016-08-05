@@ -59,10 +59,10 @@ public class UserController {
 			u.setPhoto(user.getPhoto());
 			u.setDescription(user.getDescription());
 			u.setStatus(user.getStatus());
-			u.setRole_id(user.getRole_id());
-			/*User_Type  ut = new User_Type();
+			//u.setRole_id(user.getRole_id());
+			User_Type  ut = new User_Type();
 					ut.setRole_id(user.getRole_id());
-			u.setRole_id(ut);*/
+			u.setRole_id(ut);
 			
 			if(userService.addUser(u)){
 				map.put("MESSAGE", "ADD USER");

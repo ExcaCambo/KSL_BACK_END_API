@@ -1,6 +1,6 @@
 package org.khmerslide.model;
 
-
+import org.khmerslide.entities.User_Type;
 
 public class InputUser {
 	private int user_id;
@@ -13,6 +13,8 @@ public class InputUser {
 	private String description;
 	private int status;
 	private int role_id;
+	private User_Type user_it;
+	
 	
 	public int getUser_id() {
 		return user_id;

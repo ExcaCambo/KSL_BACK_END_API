@@ -78,15 +78,17 @@
         </li>
         <li class="dropdown visible-lg visible-md"><a id="dropdownMenu2" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle header-icon lh-1 pt-15 pb-15">
             <div class="media mt-0">
-              <div class="media-left avatar"><img src="${pageContext.request.contextPath}/resources/static/img/users/21.jpg" alt="" class="media-object img-circle"><span class="status bg-success"></span></div>
+             <div class="media-left avatar">
+             	<img src="${pageContext.request.contextPath}/resources/static/img/users/" alt="" class="media-object img-circle"><!-- <span class="status bg-success"></span> -->
+             	</div>
               <div class="media-right media-middle pl-0">
-                <p class="fs-12 mb-0">សួរស្តី! Jayz Walker</p>
+                <p class="fs-12 mb-0">សួរស្តី! USER</p>
               </div>
             </div></a>
           <ul aria-labelledby="dropdownMenu2" class="dropdown-menu fs-12 animated fadeInDown">
-            <li><a href="profile.jsp"><i class="ti-user mr-5"></i> គណនី</a></li>
-            <li><a href="profile.jsp"><i class="ti-settings mr-5"></i> ការកំណត់គណនី</a></li>
-            <li><a href="login.jsp"><i class="ti-power-off mr-5"></i> ចាកចេញ</a></li>
+            <li><a href="${pageContext.request.contextPath}/profile"><i class="ti-user mr-5"></i> គណនី</a></li>
+            <li><a href="${pageContext.request.contextPath}/profile"><i class="ti-settings mr-5"></i> ការកំណត់គណនី</a></li>
+            <li><a href="${pageContext.request.contextPath}/login"><i class="ti-power-off mr-5"></i> ចាកចេញ</a></li>
           </ul>
         </li>
         <li><a href="javascript:;" role="button" class="right-sidebar-toggle bubble header-icon"><i class="ti-layout-sidebar-right"></i><span class="dot bg-danger"></span></a></li>

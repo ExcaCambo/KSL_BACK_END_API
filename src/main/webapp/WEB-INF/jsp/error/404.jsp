@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Error 401</title>
+<title>ERROR PAGE NOT FOUNT</title>
 </head>
 <body>
-Error 401
+	<center>
+		<img alt="PAGE NOT FOUNT" src="${pageContext.request.contextPath}/resources/static/img/error/404-error-page-example.jpg">
+	</center>
 </body>
 </html>

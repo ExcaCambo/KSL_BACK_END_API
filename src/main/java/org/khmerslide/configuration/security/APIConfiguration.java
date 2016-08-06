@@ -20,7 +20,7 @@ public class APIConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("dev").password("!@#api").roles("API_DEVELOPER");
+		auth.inMemoryAuthentication().withUser("chhaichivon").password("@wsdeveloper@").roles("API_DEVELOPER");
 	}
 	
 	@Override
@@ -28,6 +28,7 @@ public class APIConfiguration extends WebSecurityConfigurerAdapter {
 		http.antMatcher("/api/**")
 			.authorizeRequests()
 			.anyRequest().hasRole("API_DEVELOPER");
+		
 		http.csrf().disable();
 		
 		// Basic Authentication

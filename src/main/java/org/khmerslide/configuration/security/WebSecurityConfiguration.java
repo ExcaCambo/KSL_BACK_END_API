@@ -5,11 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
-
 
 @Configuration
 @EnableWebSecurity
@@ -24,25 +21,17 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("admin").password("123").roles("ADMIN");
-		auth.inMemoryAuthentication().withUser("user").password("123").roles("USER");
-		auth.inMemoryAuthentication().withUser("dba").password("123").roles("ADMIN", "USER" , "DBA");
-		auth.inMemoryAuthentication().withUser("dev").password("dev").roles("DEVELOPER");
-
-		//auth.userDetailsService(userDetailService);
-		//	  .passwordEncoder(passwordEncoder());
-		
-/*		me */
+		/*api developer only*/ 
+		auth.inMemoryAuthentication().withUser("ksl").password("ksl").roles("DEVELOPER");
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		/*mapping all input */
 		http
 			.authorizeRequests()
-			.antMatchers("/admin/index" , "/admin/home" , "/admin/**").permitAll()
-			.antMatchers("/admin/**").hasRole("ADMIN")
-			.antMatchers("/user/**").hasRole("USER")
-			.antMatchers("/dba/**").hasAnyRole("ADMIN","USER" , "DBA")
-			.antMatchers("/swagger/**").hasAnyRole("ADMIN","USER" , "DBA", "DEVELOPER");
+			.antMatchers("/","/home","/index","developer","/admin","/user").permitAll()
+			.antMatchers("/developer/**").hasAnyRole("DEVELOPER");
+		
 		http
 			.formLogin()
 			.loginPage("/admin/login")
@@ -51,8 +40,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.permitAll()
 			.failureHandler(ajaxAuthenticationFailureHandler)
 			.successHandler(ajaxAuthenticationSuccessHandler);
-		
+		/*logout*/
+		http.logout().logoutUrl("/developer/logout");
+		/*not close connection*/
 		http.csrf().disable();
+		/*go to access deny*/
 		http.exceptionHandling().accessDeniedPage("/access-denied");
 	}
 }

@@ -1,4 +1,4 @@
-/*package org.khmerslide.configuration.security;
+package org.khmerslide.configuration.security;
 
 import java.io.IOException;
 
@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 
 @Component("RESTAuthenticationEntryPoint")
 public class RESTAuthenticationEntryPoint implements AuthenticationEntryPoint{
-
-
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
 			throws IOException, ServletException {
@@ -25,4 +23,3 @@ public class RESTAuthenticationEntryPoint implements AuthenticationEntryPoint{
 
 
 }
-*/

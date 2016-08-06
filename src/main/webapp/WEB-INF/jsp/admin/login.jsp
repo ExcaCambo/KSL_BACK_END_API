@@ -7,11 +7,11 @@
   	<jsp:include page="../include/admin/css-include.jsp"></jsp:include>
     <%-- <%@ include file="../include/css-include.jsp" %> --%>
   </head>
-  <body style="background-image: url(../../images/backgrounds/17.jpg)" class="body-bg-full v2">
+  <!-- <body style="background-image: url(../../images/backgrounds/17.jpg)" class="body-bg-full v2">
     <div class="container page-container">
       <div class="page-content">
         <div class="v2">
-          <div class="logo"><img src="../../images/logo/logo-iconic-dark.png" alt="" width="100"></div>
+          <div class="logo"><img src="/resources/webjars/logo/logo_small.png"" alt="" width="100"></div>
           <form action="index.jsp" class="form-horizontal" action="login" id="frmLogin" method="POST">
             <div class="form-group">
               <div class="col-xs-12">
@@ -50,41 +50,19 @@
           </div>
         </div>
       </div>
-    </div>
-    <!-- Demo Settings start-->
-<!--     <div class="setting closed"><a href="javascript:;" class="setting-toggle fs-16"><i class="ti-palette text-muted"></i></a>
-      <h5 class="fs-16 mt-0 mb-20">Header Colors</h5>
-      <ul class="list-inline">
-        <li><a href="javascript:;" data-color="header-primary" class="mo-xs bg-primary inline-block img-circle header-color"></a></li>
-        <li><a href="javascript:;" data-color="header-green" class="mo-xs bg-success inline-block img-circle header-color"></a></li>
-        <li><a href="javascript:;" data-color="header-purple" class="mo-xs bg-purple inline-block img-circle header-color"></a></li>
-        <li><a href="javascript:;" data-color="header-yellow" class="mo-xs bg-warning inline-block img-circle header-color"></a></li>
-        <li><a href="javascript:;" data-color="header-red" class="mo-xs bg-danger inline-block img-circle header-color"></a></li>
-      </ul>
-      <h5 class="fs-16 mt-0 mb-20">Sidebar Style</h5>
-      <ul class="list-inline">
-        <li><a href="javascript:;" data-color="sidebar-dark" class="sidebar-color mo-xs bg-black inline-block img-circle"></a></li>
-        <li><a href="javascript:;" data-color="sidebar-light" class="sidebar-color mo-xs bg-default inline-block img-circle"></a></li>
-      </ul>
-      <form class="form-horizontal mb-20">
-        <div class="clearfix">
-          <p class="form-control-static pull-left">Background Image</p>
-          <div class="switch pull-right">
-            <input id="sidebar-bg" type="checkbox" checked="">
-            <label for="sidebar-bg" class="switch-success"></label>
-          </div>
-        </div>
-      </form>
-      <ul class="list-inline mb-0">
-        <li><a href="javascript:;" data-bg="10.jpg" class="inline-block sidebar-bg"><img src="../../images/thumbnails/10.jpg" width="60" alt="" class="img-rounded"></a></li>
-        <li><a href="javascript:;" data-bg="11.jpg" class="inline-block sidebar-bg"><img src="../../images/thumbnails/11.jpg" width="60" alt="" class="img-rounded"></a></li>
-        <li><a href="javascript:;" data-bg="12.jpg" class="inline-block sidebar-bg"><img src="../../images/thumbnails/12.jpg" width="60" alt="" class="img-rounded"></a></li>
-      </ul>
     </div> -->
-    <!-- Demo Settings end-->
+    <form action="login" id="frmLogin" method="POST">
+     Username
+	<input type="text" name="username"/> <br/>
+	Password
+	<input type="text" name="password"/> <br/>
 	
+	<input type="submit"/>
+
+</form>
 	<!-- including js from include/admin/js-include.jsp -->
 	<jsp:include page="../include/admin/js-include.jsp"></jsp:include>
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
         
@@ -95,7 +73,7 @@
        		  e.preventDefault();
        			
        		  $.ajax({
-  	            url: "${pageContext.request.contextPath}/login",
+  	            url: "${pageContext.request.contextPath}/admin/login",
   	            type: "POST",
   	            data: $("#frmLogin").serialize(),
 //   	            beforeSend: function (xhr) {
@@ -109,8 +87,9 @@
   	            	}else if(data == "Bad credentials"){
   	            		alert(data);
   	            	}else{
-  	            		alert("Logined success.");
-  	            		location.href = "${pageContext.request.contextPath}/"+data;
+  	            		alert("Logined success." + data);
+  	            		location.href = "${pageContext.request.contextPath}/"+data; 
+  	            		
   	            	}
   	            	
   	            },

@@ -39,6 +39,7 @@ public interface UserRepositories {
 					+ "registered_date,"
 					+ "photo,"
 					+ "description,"
+					+ "status,"
 					+ "role_id) "
 					+ "VALUES("
 					+ "#{user_id},"
@@ -49,6 +50,7 @@ public interface UserRepositories {
 					+ "#{registered_date},"
 					+ "#{photo},"
 					+ "#{description},"
+					+ "#{status},"
 					+ "#{role_id.role_id})"; 
 	@Insert(A_USER)
 	public boolean addUser(User user);
@@ -57,9 +59,12 @@ public interface UserRepositories {
 					+ "SET "
 					+ "user_name=#{user_name},"
 					+ "gender=#{gender},"
+					+ "email=#{email},"
 					+ "registered_date=#{registered_date},"
 					+ "photo=#{photo},"
-					+ "description=#{description} "
+					+ "description=#{description},"
+					+ "status=#{status},"
+					+ "role_id=#{role_id.role_id} "
 					+ "WHERE "
 					+ "user_id=#{user_id}";
 	@Update(U_USER)

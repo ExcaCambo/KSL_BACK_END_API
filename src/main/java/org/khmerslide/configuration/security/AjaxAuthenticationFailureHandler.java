@@ -1,4 +1,4 @@
-/*package org.khmerslide.configuration.security;
+package org.khmerslide.configuration.security;
 
 import java.io.IOException;
 
@@ -17,8 +17,9 @@ public class AjaxAuthenticationFailureHandler implements AuthenticationFailureHa
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException auth)
 			throws IOException, ServletException {
 		
-		
+		System.out.println("AUTH "+ auth);
+		response.getWriter().println(auth.getMessage());
+		response.getWriter().flush();
 	}
 
 }
-*/

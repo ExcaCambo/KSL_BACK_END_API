@@ -1,4 +1,4 @@
-/*package org.khmerslide.configuration.security;
+package org.khmerslide.configuration.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,14 +36,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-			.antMatchers("/" , "/home" , "/about").permitAll()
+			.antMatchers("/admin/index" , "/admin/home" , "/admin/**").permitAll()
 			.antMatchers("/admin/**").hasRole("ADMIN")
 			.antMatchers("/user/**").hasRole("USER")
 			.antMatchers("/dba/**").hasAnyRole("ADMIN","USER" , "DBA")
 			.antMatchers("/swagger/**").hasAnyRole("ADMIN","USER" , "DBA", "DEVELOPER");
 		http
 			.formLogin()
-			.loginPage("/login")
+			.loginPage("/admin/login")
 			.usernameParameter("username")
 			.passwordParameter("password")
 			.permitAll()
@@ -54,4 +54,3 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.exceptionHandling().accessDeniedPage("/access-denied");
 	}
 }
-*/

@@ -44,6 +44,7 @@
 	<!-- including js from include/admin/js-include.jsp -->
 	<jsp:include page="../include/admin/js-include.jsp"></jsp:include>
 	
+	<!-- ajax -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
         

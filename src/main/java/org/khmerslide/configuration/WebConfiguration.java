@@ -15,8 +15,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.mangofactory.swagger.annotations.ApiIgnore;
-import com.mangofactory.swagger.plugin.EnableSwagger;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableAutoConfiguration
 @Configuration
@@ -27,7 +26,7 @@ import com.mangofactory.swagger.plugin.EnableSwagger;
 		,"org.khmerslide.repositories"
 		,"org.khmerslide.services"
 		,"org.khmerslide.services.implement"})
-@EnableSwagger
+@EnableSwagger2
 public class WebConfiguration extends WebMvcConfigurerAdapter{
 	@Autowired
 	private Environment environment;

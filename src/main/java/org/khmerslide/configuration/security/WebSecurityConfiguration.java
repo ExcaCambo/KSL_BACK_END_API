@@ -29,12 +29,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		/*mapping all input */
 		http
 			.authorizeRequests()
-			.antMatchers("/","/home","/index","developer","/admin","/user").permitAll()
+			//.antMatchers("/","/home","/index","/developer","/admin","/user").permitAll()
 			.antMatchers("/developer/**").hasAnyRole("DEVELOPER");
 		
 		http
 			.formLogin()
-			.loginPage("/admin/login")
+			.loginPage("/")
 			.usernameParameter("username")
 			.passwordParameter("password")
 			.permitAll()

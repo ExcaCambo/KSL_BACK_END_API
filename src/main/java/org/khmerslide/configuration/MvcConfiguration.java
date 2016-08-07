@@ -8,9 +8,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/admin/login").setViewName("/admin/login");
+		registry.addViewController("/").setViewName("/admin/login");
+		registry.addViewController("/API.KSL").setViewName("/admin/login");
+/*		registry.addViewController("/LOGIN").setViewName("/admin/login");
+		registry.addViewController("/API.KSL/LOGIN").setViewName("/admin/login");*/
 		registry.addViewController("/developer").setViewName("/swagger");
-		
 		// Errors
 		registry.addViewController("/404").setViewName("/error/404");
 		registry.addViewController("/access-denied").setViewName("/error/404");

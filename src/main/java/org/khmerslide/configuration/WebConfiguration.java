@@ -15,6 +15,9 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.mangofactory.swagger.annotations.ApiIgnore;
+import com.mangofactory.swagger.plugin.EnableSwagger;
+
 @EnableAutoConfiguration
 @Configuration
 @MapperScan({"org.khmerslide.repositories"})
@@ -24,6 +27,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 		,"org.khmerslide.repositories"
 		,"org.khmerslide.services"
 		,"org.khmerslide.services.implement"})
+@EnableSwagger
 public class WebConfiguration extends WebMvcConfigurerAdapter{
 	@Autowired
 	private Environment environment;
@@ -46,5 +50,12 @@ public class WebConfiguration extends WebMvcConfigurerAdapter{
 		sessionFactory.setDataSource(getDataSource());
 		return sessionFactory;
 	}
+
+	
+	
+	
+	
+	
+	
 }
 

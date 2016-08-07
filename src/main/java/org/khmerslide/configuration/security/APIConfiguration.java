@@ -1,11 +1,13 @@
-/*package org.khmerslide.configuration.security;
+package org.khmerslide.configuration.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -20,7 +22,7 @@ public class APIConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("chhaichivon").password("@wsdeveloper@").roles("API_DEVELOPER");
+		auth.inMemoryAuthentication().withUser("ksl").password("kslapi").roles("API_DEVELOPER");
 	}
 	
 	@Override
@@ -31,6 +33,9 @@ public class APIConfiguration extends WebSecurityConfigurerAdapter {
 		
 		http.csrf().disable();
 		
+		http.authorizeRequests().antMatchers(HttpMethod.OPTIONS).permitAll();
+		
+		
 		// Basic Authentication
 		http.httpBasic()
 			.authenticationEntryPoint(restAuthenticationEntryPoint);
@@ -38,5 +43,9 @@ public class APIConfiguration extends WebSecurityConfigurerAdapter {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	
 	}
+	
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
+	}
 }
-*/

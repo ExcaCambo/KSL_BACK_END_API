@@ -5,11 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.khmerslide.entities.Category;
-import org.khmerslide.entities.Document;
 import org.khmerslide.model.InputCategory;
-import org.khmerslide.model.InputDocument;
 import org.khmerslide.services.CategoryService;
-import org.khmerslide.services.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import io.swagger.annotations.Api;
 
 @Controller
 @RequestMapping(value="/api/category")

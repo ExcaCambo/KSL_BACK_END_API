@@ -24,7 +24,7 @@ public class UserController {
 	@Autowired
 	private UserService  userService;
 	@ResponseBody
-	@RequestMapping(method=RequestMethod.GET,headers="Accept=Application/json")
+	@RequestMapping(method=RequestMethod.GET, headers="Accept=Application/json")
 	public ResponseEntity<Map<String, Object>> getUser(){
 		Map<String , Object> map = new HashMap<String , Object>();
 		try{

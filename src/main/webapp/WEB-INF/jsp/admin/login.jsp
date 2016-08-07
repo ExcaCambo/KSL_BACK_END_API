@@ -11,7 +11,7 @@
     <div class="container page-container">
       <div class="page-content">
         <div class="v2">
-          <div class="logo"><img src="/resources/webjars/logo/logo_small.png"" alt="" width="300"></div>
+          <div class="logo"><img src="/resources/login/logo/logo.png"" alt="" width="300"></div>
           <form  class="form-horizontal" action="login" id="frmLogin" method="POST">
             <div class="form-group">
               <div class="col-xs-12">
@@ -55,7 +55,7 @@
        		  e.preventDefault();
        			
        		  $.ajax({
-  	            url: "${pageContext.request.contextPath}/admin/login",
+  	            url: "${pageContext.request.contextPath}/",
   	            type: "POST",
   	            data: $("#frmLogin").serialize(),
 //   	            beforeSend: function (xhr) {
@@ -90,12 +90,11 @@
 			    beforeSend: function(xhr) {
                     xhr.setRequestHeader("Accept", "application/json");
                     xhr.setRequestHeader("Content-Type", "application/json");
-                    xhr.setRequestHeader("Authorization" , "Basic Y2hoYWljaGl2b246QHdzZGV2ZWxvcGVyQA==");
+                    xhr.setRequestHeader("Authorization" , "Basic a3NsOmtzbGFwaQ==");
                 },
 			    success: function(data) { 
 					console.log(data);
 				  
-					
 			    },
 			    error:function(data,status,er) { 
 			        console.log("error: "+data+" status: "+status+" er:"+er);

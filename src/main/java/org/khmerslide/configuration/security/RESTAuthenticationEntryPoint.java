@@ -15,8 +15,8 @@ public class RESTAuthenticationEntryPoint implements AuthenticationEntryPoint{
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
 			throws IOException, ServletException {
-		request.setAttribute("msg", authException.getMessage());
-		request.getRequestDispatcher("404").forward(request, response);
+		/*request.setAttribute("msg", authException.getMessage());*/
+		/*request.getRequestDispatcher("404").forward(request, response);*/
 		
 	}
 	

@@ -19,12 +19,25 @@ public class Document {
 	private int viewed = 0;
 	@JsonProperty("DESCRIPTION")
 	private String description;
+	@JsonProperty("STATUS")
 	private int status;
-	private int  doc_type_id;
-	private int user_id;
-	private int  cat_id;
+	@JsonProperty("DOC")
+	private Doc_Type  doc;
+	@JsonProperty("USER")
+	private User user;
+	@JsonProperty("CATEGORY")
+	private Category  cat;
+	@JsonProperty("THUMBNAIL")
 	private String thumbnail;
+	@JsonProperty("SOURCE")
+	private String source;
 	
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
+	}
 	public int getDoc_id() {
 		return doc_id;
 	}
@@ -79,23 +92,23 @@ public class Document {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public int getDoc_type_id() {
-		return doc_type_id;
+	public Doc_Type getDoc() {
+		return doc;
 	}
-	public void setDoc_type_id(int doc_type_id) {
-		this.doc_type_id = doc_type_id;
+	public void setDoc(Doc_Type doc) {
+		this.doc = doc;
 	}
-	public int getUser_id() {
-		return user_id;
+	public User getUser() {
+		return user;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public int getCat_id() {
-		return cat_id;
+	public Category getCat() {
+		return cat;
 	}
-	public void setCat_id(int cat_id) {
-		this.cat_id = cat_id;
+	public void setCat(Category cat) {
+		this.cat = cat;
 	}
 	public String getThumbnail() {
 		return thumbnail;

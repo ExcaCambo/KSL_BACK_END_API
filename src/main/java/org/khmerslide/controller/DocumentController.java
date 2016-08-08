@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.khmerslide.entities.Category;
+import org.khmerslide.entities.Doc_Type;
 import org.khmerslide.entities.Document;
+import org.khmerslide.entities.User;
 import org.khmerslide.model.InputDocument;
 import org.khmerslide.services.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,10 +63,18 @@ public class DocumentController {
 			doc.setViewed(document.getViewed());
 			doc.setDescription(document.getDescription());
 			doc.setStatus(document.getStatus());
-			doc.setDoc_type_id(document.getDoc_type_id());
-			doc.setUser_id(document.getUser_id());
-			doc.setCat_id(document.getCat_id());
+			Doc_Type dt = new Doc_Type();
+				dt.setDoc_type(document.getDoc_id());
+			doc.setDoc(dt);
+			User u = new User();
+				u.setUser_id(document.getUser_id());
+			doc.setUser(u);
+			Category  c = new Category();
+				c.setCat_id(document.getCat_id());
+			doc.setCat(c);
 			doc.setThumbnail(document.getThumbnail());
+			doc.setSource(document.getSource());
+			
 			if(documentService.addDocument(doc)){
 				map.put("MESSAGE", "ADD DOCUMENT");
 				map.put("STATUS", true);

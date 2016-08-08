@@ -14,6 +14,14 @@ public class InputDocument {
 	private int user_id;
 	private int  cat_id;
 	private String thumbnail;
+	private String source;
+	
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
+	}
 	public int getDoc_id() {
 		return doc_id;
 	}

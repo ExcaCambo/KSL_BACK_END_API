@@ -13,11 +13,17 @@ public class Category {
 	private String created_date;
 	@JsonProperty("STATUS")
 	private int status;
-	@JsonProperty("USER_ID")
-	private int  user_id;
+	@JsonProperty("USER")
+	private User  user;
 	@JsonProperty("DESCRIPTION")
 	private String description;
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public int getCat_id() {
 		return cat_id;
 	}
@@ -47,12 +53,6 @@ public class Category {
 	}
 	public void setStatus(int status) {
 		this.status = status;
-	}
-	public int getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
 	}
 	public String getDescription() {
 		return description;

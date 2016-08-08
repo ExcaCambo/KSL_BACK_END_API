@@ -13,40 +13,30 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DocumentRepository {
-	String G_DOC="SELECT "
-				+"d.doc_id,"
-				+"d.doc_title,"
-				+"d.uploaded_date,"
-				+"d.url,"
-				+"d.liked,"
-				+"d.shared,"
-				+"d.viewed,"
-				+"d.description,"
-				+"d.status,"
-				+"d.doc_type_id,"
-				+"d.user_id,"
-				+"d.cat_id,"
-				+"d.thumbnail "
-				+"FROM "
-				+"ksl_document d "
-				+"INNER JOIN ksl_doc_type dt ON d.doc_type_id = dt.doc_type_id " 
-				+"INNER JOIN ksl_category ct ON d.cat_id = ct.cat_id "
-				+"INNER JOIN ksl_user u ON d.user_id = u.user_id";
+	String G_DOC="SELECT" 
+			+" d.doc_id,"
+			+" d.doc_title,"
+			+" d.uploaded_date,"
+			+" d.url,"
+			+" d.liked,"
+			+" d.shared,"
+			+" d.viewed,"
+			+" d.description,"
+			+" d.status,"
+			+" dt.doc_name,"
+			+" u.user_name,"
+			+" ct.cat_name,"
+			+" d.thumbnail" 
+			+" FROM" 
+			+" ksl_document d"
+			+" INNER JOIN ksl_doc_type dt ON d.doc_type_id = dt.doc_type_id"  
+			+" INNER JOIN ksl_category ct ON d.cat_id = ct.cat_id"
+			+" INNER JOIN ksl_user u ON d.user_id = u.user_id";
 	@Select(G_DOC)
 	@Results(value={
-			@Result(property="doc_id",column="doc_id"),
-			@Result(property="doc_title",column="doc_title"),
-			@Result(property="uploaded_date",column="uploaded_date"),
-			@Result(property="url",column="url"),
-			@Result(property="liked",column="liked"),
-			@Result(property="shared",column="shared"),
-			@Result(property="viewed",column="viewed"),
-			@Result(property="description",column="description"),
-			@Result(property="status",column="status"),
-			@Result(property="doc_type_id",column="doc_type_id"),
-			@Result(property="user_id",column="user_id"),
-			@Result(property="cat_id",column="cat_id"),
-			@Result(property="thumbnail",column="thumbnail")
+			@Result(property="doc.doc_name",column="doc_name"),
+			@Result(property="user.user_name",column="user_name"),
+			@Result(property="cat.cat_name",column="cat_name")
 	})
 	public ArrayList<Document> getDocument();
 	

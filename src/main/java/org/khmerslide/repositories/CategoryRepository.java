@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.khmerslide.entities.Category;
@@ -11,17 +13,24 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CategoryRepository {
 	String G_C="SELECT "
-			+ "cat_id,"
-			+ "parent_id,"
-			+ "cat_name,"
-			+ "created_date,"
-			+ "status,"
-			+ "user_id,"
-			+ "description "
-			+ "FROM "
-			+ "ksl_category";
+			+" CB.cat_id,"
+			+" S.cat_name,"
+			+" CB.cat_name,"
+			+" CB.created_date,"
+			+" CB.status,"
+			+" U.user_name,"
+			+" CB.description,"
+			+" CB.icon"
+			+" FROM  ksl_category S"
+			+" INNER JOIN ksl_category CB ON S.cat_id = CB.parent_id"
+			+" INNER JOIN ksl_user U ON S.user_id = U.user_id";
 	@Select(G_C)
+	@Results(value={
+			@Result(property="user.user_name", column="user_name")
+	})
 	public ArrayList<Category> getCategory();
+	
+	
 	String A_C="INSERT INTO "
 			+ "ksl_category("
 			+ "cat_id,"

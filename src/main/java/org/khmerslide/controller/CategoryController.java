@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.khmerslide.entities.Category;
+import org.khmerslide.entities.User;
 import org.khmerslide.model.InputCategory;
 import org.khmerslide.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,9 @@ public class CategoryController {
 			cat.setCat_name(category.getCat_name());
 			cat.setCreated_date(category.getCreated_date());
 			cat.setStatus(category.getStatus());
-			cat.setUser_id(category.getU_id());
+			User u = new User();
+				u.setUser_id(category.getU_id());
+			cat.setUser(u);
 			cat.setDescription(category.getDescription());
 			if(categoryService.addCategory(cat)){
 				map.put("MESSAGE", "ADD CATEGORY");

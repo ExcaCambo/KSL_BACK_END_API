@@ -19,10 +19,6 @@ public interface UserRepositories {
 		2.disactive
 		3.delete
 	*/
-	
-	
-	
-	
 	String G_USER="SELECT "
 				+" U.user_id,"
 				+" U.user_name,"
@@ -34,34 +30,15 @@ public interface UserRepositories {
 				+" U.description,"
 				+" U.status,"
 				+" ut.role_name"
-				+" FROM"
+				+" FROM "
 				+" ksl_user U"
 				+" INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id"
-				+ "WHERE status != 3";
+				+" WHERE U.status != 3";
 	@Select(G_USER)
 	@Results(value={
 			@Result(property="role.role_name", column="role_name")
 	})
 	public ArrayList<User> getUser();
-	
-/*	String SUTA="SELECT "
-			+" U.user_id,"
-			+" U.user_name,"
-			+" U.gender,"
-			+" U.email,"
-			+" U.password,"
-			+" U.registered_date,"
-			+" U.photo,"
-			+" U.description,"
-			+" U.status,"
-			+" ut.role_name "
-			+" FROM"
-			+" ksl_user U" 
-			+" INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id" 
-			+" WHERE U.status = ";
-	@Select(SUTA)
-	public boolean selectUserThatActive(int status);*/
-	
 
 	String A_USER="INSERT INTO "
 					+ "ksl_user("

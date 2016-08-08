@@ -1,12 +1,21 @@
 package org.khmerslide.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Save_List {
+	@JsonProperty("SL_ID")
 	private int sl_id;
+	@JsonProperty("SL_NAME")
 	private String sl_name;
+	@JsonProperty("SAVED_DATE")
 	private String saved_date;
+	@JsonProperty("STATUS")
 	private int status;
+	@JsonProperty("USER_ID")
 	private int  user_id;
+	@JsonProperty("DOC_ID")
 	private int  doc_id;
+	@JsonProperty("DESCRIPTION")
 	private String description;
 	
 	public int getDoc_id() {

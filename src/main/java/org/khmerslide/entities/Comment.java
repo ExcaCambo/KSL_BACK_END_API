@@ -1,11 +1,19 @@
 package org.khmerslide.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Comment {
+	@JsonProperty("CMT_ID")
 	private int cmt_id;
+	@JsonProperty("CMT_TEXT")
 	private String cmt_text;
+	@JsonProperty("CMT_DATE")
 	private String cmt_date;
+	@JsonProperty("STATUS")
 	private int status;
+	@JsonProperty("USER_ID")
 	private int user_id;
+	@JsonProperty("DOC_ID")
 	private int  doc_id;
 	public int getCmt_id() {
 		return cmt_id;

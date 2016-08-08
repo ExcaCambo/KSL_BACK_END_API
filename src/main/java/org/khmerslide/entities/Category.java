@@ -1,12 +1,21 @@
 package org.khmerslide.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Category {
+	@JsonProperty("CAT_ID")
 	private int cat_id;
+	@JsonProperty("PARENT_ID")
 	private int parent_id;
+	@JsonProperty("CAT_NAME")
 	private String cat_name;
+	@JsonProperty("CREATED_DATE")
 	private String created_date;
+	@JsonProperty("STATUS")
 	private int status;
+	@JsonProperty("USER_ID")
 	private int  user_id;
+	@JsonProperty("DESCRIPTION")
 	private String description;
 	
 	public int getCat_id() {

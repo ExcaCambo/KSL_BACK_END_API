@@ -28,5 +28,13 @@ public class UserServiceImplement implements UserService{
 	public boolean deleteUser(int id) {
 		return userRepository.deleteUser(id);
 	}
+	@Override
+	public boolean selectUserThatActive(int stutus) {
+		return userRepository.selectUserThatActive(stutus);
+	}
+	@Override
+	public boolean setApproveByAdmin(int status) {
+		return userRepository.setApproveByAdmin(status);
+	}
 
 }

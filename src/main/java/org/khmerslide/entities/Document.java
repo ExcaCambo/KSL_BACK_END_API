@@ -1,13 +1,23 @@
 package org.khmerslide.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Document {
+	@JsonProperty("DOC_ID")
 	private int doc_id;
+	@JsonProperty("DOC_TITLE")
 	private String doc_title;
+	@JsonProperty("UPLOADED_DATE")
 	private String uploaded_date;
+	@JsonProperty("URL")
 	private String url;
+	@JsonProperty("LIKED")
 	private int liked = 0;
+	@JsonProperty("SHARED")
 	private int shared = 0;
+	@JsonProperty("VIEWED")
 	private int viewed = 0;
+	@JsonProperty("DESCRIPTION")
 	private String description;
 	private int status;
 	private int  doc_type_id;

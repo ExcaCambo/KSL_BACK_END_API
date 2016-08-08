@@ -1,10 +1,17 @@
 package org.khmerslide.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class View_History {
+	@JsonProperty("VH_ID")
 	private int vh_id;
+	@JsonProperty("ADDED_DATE")
 	private String added_date;
+	@JsonProperty("USER_ID")
 	private int  user_id;
+	@JsonProperty("DOC_ID")
 	private int  doc_id;
+	@JsonProperty("DESCRIPTION")
 	private String description;
 	
 	public int getVh_id() {

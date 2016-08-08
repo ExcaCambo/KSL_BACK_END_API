@@ -10,8 +10,8 @@ public class InputUser {
 	private String registered_date;
 	private String photo;
 	private String description;
-	private int status;
-	private int role_id;
+	private int status = 2;
+	private int role_id = 2;
 	
 	public int getUser_id() {
 		return user_id;

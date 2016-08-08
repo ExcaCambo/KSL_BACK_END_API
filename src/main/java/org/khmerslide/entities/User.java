@@ -1,15 +1,25 @@
 package org.khmerslide.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class User {
+	@JsonProperty("USER_ID")
 	private int user_id;
+	@JsonProperty("USER_NAME")
 	private String user_name;
+	@JsonProperty("GENDER")
 	private String gender;
+	@JsonProperty("EMAIL")
 	private String email;
+	@JsonProperty("PASSWORD")
 	private String password;
+	@JsonProperty("REGISTERED_DATE")
 	private String registered_date;
+	@JsonProperty("PHOTO")
 	private String photo;
+	@JsonProperty("DESCRIPTION")
 	private String description;
-	private int status;
+	private int status = 2;
 	private User_Type role_id;
 	
 	public User_Type getRole_id() {

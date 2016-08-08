@@ -12,6 +12,15 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepositories {
+	
+	/*  1 active
+		2.disactive
+		3.delete
+	*/
+	
+	
+	
+	
 	String G_USER="SELECT "
 				+"U.user_id,"
 				+"U.user_name,"
@@ -25,10 +34,29 @@ public interface UserRepositories {
 				+"U.role_id "
 				+"FROM "
 				+"ksl_user U "
-				+"INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id";
+				+"INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id ";
 	@Select(G_USER)
 	public ArrayList<User> getUser();
 	
+	String SUTA="SELECT "
+			+"U.user_id,"
+			+"U.user_name,"
+			+"U.gender,"
+			+"U.email,"
+			+"U.password,"
+			+"U.registered_date,"
+			+"U.photo,"
+			+"U.description,"
+			+"U.status,"
+			+"U.role_id "
+			+"FROM "
+			+"ksl_user U "
+			+"INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id "
+			+"WHERE status = 1";
+@Select(SUTA)
+	public boolean selectUserThatActive(int status);
+	
+
 	String A_USER="INSERT INTO "
 					+ "ksl_user("
 					+ "user_id,"
@@ -54,7 +82,20 @@ public interface UserRepositories {
 					+ "#{role_id.role_id})"; 
 	@Insert(A_USER)
 	public boolean addUser(User user);
-
+	
+	
+	
+	
+	String UABA="UPDATE ksl_user "
+			+ " SET"
+			+ " status=#{status}"
+			+ " WHERE stutus = 2 "
+			+ " AND"
+			+ " user_id =#{user_id}";
+	@Update(UABA)
+	public boolean setApproveByAdmin(int status);
+	
+	
 	String U_USER="UPDATE ksl_user "
 					+ "SET "
 					+ "user_name=#{user_name},"

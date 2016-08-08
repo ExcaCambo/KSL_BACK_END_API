@@ -45,6 +45,31 @@ public class UserController {
 		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
 	}
 	
+	
+	
+	@RequestMapping(value="/{status}" ,method=RequestMethod.GET, headers="Accept=Application/json")
+	public ResponseEntity<Map<String, Object>> selectUserThatActive(){
+		Map<String , Object> map = new HashMap<String , Object>();
+		try{
+			ArrayList<User> users = userService.getUser();
+			if(!users.isEmpty()){
+				map.put("DATA", users);
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA FOUND!");
+			}else{
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA NOT FOUND!");
+			}
+		}catch(Exception e){
+			map.put("STATUS", false);
+			map.put("MESSAGE", "ERROR!");
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
+	}
+	
+	
+	
 	@RequestMapping(method = RequestMethod.POST, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> addUser(@RequestBody InputUser user){
 		Map<String,Object> map = new HashMap<String, Object>();
@@ -79,6 +104,28 @@ public class UserController {
 		return new ResponseEntity<Map<String,Object>>(map , HttpStatus.OK);
 		
 	}
+	
+	
+	@RequestMapping(value="/{status}" ,method = RequestMethod.POST, headers="Accept=Application/json")
+	public ResponseEntity<Map<String , Object>> setApproveByAdmin(@PathVariable("status") int status){
+		Map<String,Object> map = new HashMap<String, Object>();
+		try{
+			if(userService.setApproveByAdmin(status)){
+				map.put("MESSAGE", "USER HAVE BEEN APPROVE");
+				map.put("STATUS", true);
+			}else{
+				map.put("MESSAGE", "NOT ADD USER");
+				map.put("STATUS", false);
+			}
+		}catch(Exception e){
+			map.put("MESSAGE", "Error!");
+			map.put("STATUS", false);
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Map<String,Object>>(map , HttpStatus.OK);
+		
+	}
+	
 	
 	@RequestMapping(method=RequestMethod.PUT, headers = "Accept=Application/json")
 	public ResponseEntity<Map<String, Object>> updateUser(@RequestBody User user){

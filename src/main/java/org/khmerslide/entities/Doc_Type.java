@@ -1,9 +1,15 @@
 package org.khmerslide.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Doc_Type {
+	@JsonProperty("DOC_TYPE_ID")
 	private int doc_type_id;
+	@JsonProperty("DOC_NAME")
 	private String doc_name;
+	@JsonProperty("STATUS")
 	private int status;
+	@JsonProperty("DESCRIPTION")
 	private String description;
 	
 	public int getDoc_type() {

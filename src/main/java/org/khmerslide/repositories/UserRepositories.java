@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.khmerslide.entities.User;
@@ -22,39 +24,43 @@ public interface UserRepositories {
 	
 	
 	String G_USER="SELECT "
-				+"U.user_id,"
-				+"U.user_name,"
-				+"U.gender,"
-				+"U.email,"
-				+"U.password,"
-				+"U.registered_date,"
-				+"U.photo,"
-				+"U.description,"
-				+"U.status,"
-				+"U.role_id "
-				+"FROM "
-				+"ksl_user U "
-				+"INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id ";
+				+" U.user_id,"
+				+" U.user_name,"
+				+" U.gender,"
+				+" U.email,"
+				+" U.password,"
+				+" U.registered_date,"
+				+" U.photo,"
+				+" U.description,"
+				+" U.status,"
+				+" ut.role_name"
+				+" FROM"
+				+" ksl_user U"
+				+" INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id"
+				+ "WHERE status != 3";
 	@Select(G_USER)
+	@Results(value={
+			@Result(property="role.role_name", column="role_name")
+	})
 	public ArrayList<User> getUser();
 	
-	String SUTA="SELECT "
-			+"U.user_id,"
-			+"U.user_name,"
-			+"U.gender,"
-			+"U.email,"
-			+"U.password,"
-			+"U.registered_date,"
-			+"U.photo,"
-			+"U.description,"
-			+"U.status,"
-			+"U.role_id "
-			+"FROM "
-			+"ksl_user U "
-			+"INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id "
-			+"WHERE status = 1";
-@Select(SUTA)
-	public boolean selectUserThatActive(int status);
+/*	String SUTA="SELECT "
+			+" U.user_id,"
+			+" U.user_name,"
+			+" U.gender,"
+			+" U.email,"
+			+" U.password,"
+			+" U.registered_date,"
+			+" U.photo,"
+			+" U.description,"
+			+" U.status,"
+			+" ut.role_name "
+			+" FROM"
+			+" ksl_user U" 
+			+" INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id" 
+			+" WHERE U.status = ";
+	@Select(SUTA)
+	public boolean selectUserThatActive(int status);*/
 	
 
 	String A_USER="INSERT INTO "

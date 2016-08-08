@@ -19,14 +19,19 @@ public class User {
 	private String photo;
 	@JsonProperty("DESCRIPTION")
 	private String description;
-	private int status = 2;
-	private User_Type role_id;
+	@JsonProperty("STATUS")
+	private int status;
+	@JsonProperty("ROLE")
+	private User_Type role;
 	
-	public User_Type getRole_id() {
-		return role_id;
+	
+	
+	
+	public User_Type getRole() {
+		return role;
 	}
-	public void setRole_id(User_Type role_id) {
-		this.role_id = role_id;
+	public void setRole(User_Type role) {
+		this.role = role;
 	}
 	public int getUser_id() {
 		return user_id;

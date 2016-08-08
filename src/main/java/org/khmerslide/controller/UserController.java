@@ -47,27 +47,6 @@ public class UserController {
 	
 	
 	
-	@RequestMapping(value="/{status}" ,method=RequestMethod.GET, headers="Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> selectUserThatActive(){
-		Map<String , Object> map = new HashMap<String , Object>();
-		try{
-			ArrayList<User> users = userService.getUser();
-			if(!users.isEmpty()){
-				map.put("DATA", users);
-				map.put("STATUS", true);
-				map.put("MESSAGE", "DATA FOUND!");
-			}else{
-				map.put("STATUS", true);
-				map.put("MESSAGE", "DATA NOT FOUND!");
-			}
-		}catch(Exception e){
-			map.put("STATUS", false);
-			map.put("MESSAGE", "ERROR!");
-			e.printStackTrace();
-		}
-		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
-	}
-	
 	
 	
 	@RequestMapping(method = RequestMethod.POST, headers="Accept=Application/json")
@@ -87,7 +66,7 @@ public class UserController {
 			//u.setRole_id(user.getRole_id());
 			User_Type  ut = new User_Type();
 					ut.setRole_id(user.getRole_id());
-			u.setRole_id(ut);
+			u.setRole(ut);
 			
 			if(userService.addUser(u)){
 				map.put("MESSAGE", "ADD USER");

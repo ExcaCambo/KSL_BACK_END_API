@@ -97,6 +97,9 @@ public class CategoryController {
 				Category parentCategory = new Category();
 				parentCategory.setCat_id(updateCategory.getParent_id());
 			cat.setParent(parentCategory);
+			cat.setStatus(updateCategory.getStatus());
+			cat.setDescription(updateCategory.getDescription());
+			cat.setIcon(updateCategory.getIcon());
 			
 			if(categoryService.updateCategory(cat)){
 				map.put("MESSAGE", "UPDATE CATEGORY");

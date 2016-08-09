@@ -1,5 +1,7 @@
 package org.khmerslide.entities;
 
+import org.khmerslide.model.InputComment;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Comment {
@@ -15,6 +17,15 @@ public class Comment {
 	private User user;
 	@JsonProperty("DOC_ID")
 	private Document  doc;
+	@JsonProperty("DISCRIPTION")
+	private String description;
+	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public int getCmt_id() {
 		return cmt_id;
 	}
@@ -52,4 +63,17 @@ public class Comment {
 		this.doc = doc;
 	}
 	
+	public static class updateComment extends InputComment{
+		@JsonProperty("CMT_TEXT")
+		private String cmt_text;
+
+		public String getCmt_text() {
+			return cmt_text;
+		}
+
+		public void setCmt_text(String cmt_text) {
+			this.cmt_text = cmt_text;
+		}
+		
+	}
 }

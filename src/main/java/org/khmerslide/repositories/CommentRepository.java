@@ -28,8 +28,8 @@ public interface CommentRepository {
 			+" D.doc_title" 
 			+" FROM" 
 			+" ksl_comment C"
-			+" INNER JOIN ksl_user U ON C.user_id = U.user_id"
-			+" INNER JOIN ksl_document D ON C.doc_id = D.doc_id"
+			+" FULL JOIN ksl_user U ON C.user_id = U.user_id"
+			+" FULL JOIN ksl_document D ON C.doc_id = D.doc_id"
 			+" WHERE C.status = 1 ";
 	@Select(G_CM)
 	@Results(value={
@@ -50,17 +50,21 @@ public interface CommentRepository {
 			+ "#{cmt_text},"
 			+ "#{cmt_date},"
 			+ "#{status},"
-			+ "#{user_id},"
-			+ "#{doc_id})";
+			+ "#{user.user_id},"
+			+ "#{doc.doc_id})";
 	@Insert(A_CM)
+	@Results(value={
+			@Result(property="user.user_id",column="user_id"),
+			@Result(property="doc.doc_id",column="doc_id")
+	})
 	public boolean addComment(Comment comment);
 	
 	String U_CM="UPDATE ksl_comment SET "
 			+ "cmt_text=#{cmt_text},"
 			+ "cmt_date=#{cmt_date},"
 			+ "status=#{status},"
-			+ "user_id=#{user_id},"
-			+ "doc_id=#{doc_id} "
+			+ "user_id=#{user.user_id},"
+			+ "doc_id=#{doc.doc_id} "
 			+ "WHERE "
 			+ "cmt_id=#{cmt_id}";
 	@Update(U_CM)

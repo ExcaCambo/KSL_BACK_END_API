@@ -12,18 +12,13 @@ public class Save_List {
 	@JsonProperty("STATUS")
 	private int status;
 	@JsonProperty("USER_ID")
-	private int  user_id;
+	private User  user;
 	@JsonProperty("DOC_ID")
-	private int  doc_id;
+	private Document doc;
 	@JsonProperty("DESCRIPTION")
 	private String description;
 	
-	public int getDoc_id() {
-		return doc_id;
-	}
-	public void setDoc_id(int doc_id) {
-		this.doc_id = doc_id;
-	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -54,11 +49,17 @@ public class Save_List {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public int getUser_id() {
-		return user_id;
+	public User getUser() {
+		return user;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Document getDoc() {
+		return doc;
+	}
+	public void setDoc(Document doc) {
+		this.doc = doc;
 	}
 	
 }

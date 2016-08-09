@@ -50,21 +50,20 @@ public class CommentController {
 	
 	
 	@RequestMapping(value={"/add-comment"},method = RequestMethod.POST, headers="Accept=Application/json")
-	public ResponseEntity<Map<String , Object>> addComment(@RequestBody InputComment comment){
+	public @ResponseBody ResponseEntity<Map<String , Object>> addComment(@RequestBody InputComment insertcomment){
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
 			Comment com = new Comment();
-			com.setCmt_id(comment.getCmt_id());
-			com.setCmt_text(comment.getCmt_text());
-			com.setCmt_date(comment.getCmt_date());
-			com.setStatus(comment.getStatus());
-				User  u = new User();
-					u.setUser_id(u.getUser_id());
+			com.setCmt_text(insertcomment.getCmt_text());
+			com.setCmt_date(insertcomment.getCmt_date());
+			com.setStatus(insertcomment.getStatus());
+			 	User  u = new User();
+			 		u.setUser_id(u.getUser_id());
 			com.setUser(u);
-				Document  doc = new Document();
-					doc.setDoc_id(doc.getDoc_id());
-			com.setDoc(doc);
-			
+				Document d = new Document();
+				d.setDoc_id(d.getDoc_id());
+			com.setDoc(d);
+			com.setDescription(insertcomment.getDescription());
 			if(commentService.addComment(com)){
 				map.put("MESSAGE", "ADD COMMENT");
 				map.put("STATUS", true);
@@ -81,11 +80,15 @@ public class CommentController {
 		
 	}
 	
-	@RequestMapping(value={"/update-comment"},method=RequestMethod.PUT, headers = "Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> updateComment(@RequestBody Comment comment){
+	@RequestMapping(value={"/update-comment/{cmt_id}"},method=RequestMethod.PUT, headers = "Accept=Application/json")
+	public ResponseEntity<Map<String, Object>> updateComment(@PathVariable("cmt_id") int cmt_id ,@RequestBody InputComment updatecomment){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
-			if(commentService.updateComment(comment)){
+				Comment C = new Comment();
+				C.setCmt_id(cmt_id); //set cmt_id
+				C.setCmt_text(updatecomment.getCmt_text());
+				//user can comment only text
+			if(commentService.updateComment(C)){
 				map.put("MESSAGE", "UPDATE COMMENT");
 				map.put("STATUS", true);
 			}else{

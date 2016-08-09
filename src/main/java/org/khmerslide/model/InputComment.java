@@ -2,35 +2,27 @@ package org.khmerslide.model;
 
 
 
-import org.khmerslide.entities.Document;
-import org.khmerslide.entities.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class InputComment {
-	private int cmt_id;
+	@JsonProperty("CMT_TEXT")
 	private String cmt_text;
+	@JsonProperty("CMT_DATE")
 	private String cmt_date;
+	@JsonProperty("STATUS")
 	private int status;
-	private User user;
-	private Document  doc;
+	@JsonProperty("USER_ID")
+	private int user;
+	@JsonProperty("DOC_ID")
+	private int  doc;
+	@JsonProperty("DISCRIPTION")
+	private String description;
 	
-	
-	public User getUser() {
-		return user;
+	public String getCmt_date() {
+		return cmt_date;
 	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public Document getDoc() {
-		return doc;
-	}
-	public void setDoc(Document doc) {
-		this.doc = doc;
-	}
-	public int getCmt_id() {
-		return cmt_id;
-	}
-	public void setCmt_id(int cmt_id) {
-		this.cmt_id = cmt_id;
+	public void setCmt_date(String cmt_date) {
+		this.cmt_date = cmt_date;
 	}
 	public String getCmt_text() {
 		return cmt_text;
@@ -38,18 +30,29 @@ public class InputComment {
 	public void setCmt_text(String cmt_text) {
 		this.cmt_text = cmt_text;
 	}
-	public String getCmt_date() {
-		return cmt_date;
-	}
-	public void setCmt_date(String cmt_date) {
-		this.cmt_date = cmt_date;
-	}
 	public int getStatus() {
 		return status;
 	}
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
+	public int getUser() {
+		return user;
+	}
+	public void setUser(int user) {
+		this.user = user;
+	}
+	public int getDoc() {
+		return doc;
+	}
+	public void setDoc(int doc) {
+		this.doc = doc;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	
 }

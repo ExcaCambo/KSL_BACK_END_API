@@ -13,17 +13,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SaveListRepository {
 	/*  Status 
-    1 active
-	2.disactive
-	3.delete
+    	1 NOT DELETE
+		2.DELETE
 	 */
 	String G_SL="SELECT"
 			+" S.sl_id,"
 			+" S.sl_name,"
 			+" S.saved_date,"
 			+" S.status,"
-			+" U.user_id,"
-			+" D.doc_id,"
+			+" U.user_name,"
+			+" D.doc_title,"
 			+" S.description"
 			+" FROM"
 			+" ksl_save_list S"
@@ -31,15 +30,10 @@ public interface SaveListRepository {
 			+" INNER JOIN ksl_document D ON S.doc_id = D.doc_id"
 			+" WHERE S.status = 1";
 	@Select(G_SL)
-	/*@Results(value={
-			@Result(property="sl_id",column="sl_id"),
-			@Result(property="sl_name",column="sl_name"),
-			@Result(property="saved_date",column="saved_date"),
-			@Result(property="status",column="status"),
-			@Result(property="User.user_id",column="user_id"),
-			@Result(property="Document.doc_id",column="doc_id"),
-			@Result(property="description",column="description"),
-	})*/
+	@Results(value={
+			@Result(property="user.user_name",column="user_name"),
+			@Result(property="doc.doc_name",column="doc_name")
+	})
 	public ArrayList<Save_List> getSaveList();
 	String A_SL="INSERT INTO "
 				+ "ksl_save_list("
@@ -55,17 +49,21 @@ public interface SaveListRepository {
 				+ "#{sl_name},"
 				+ "#{saved_date},"
 				+ "#{status},"
-				+ "#{user_id},"
-				+ "#{doc_id},"
+				+ "#{user.user_id},"
+				+ "#{doc.doc_id},"
 				+ "#{description})";
 	@Insert(A_SL)
+	@Results(value={
+			@Result(property="user.user_id",column="user_id"),
+			@Result(property="doc.doc_id",column="doc_id")
+	})
 	public boolean addSaveList(Save_List savelist);
 	String U_SL="UPDATE ksl_save_list SET "
 			+ "sl_name=#{sl_name},"
 			+ "saved_date=#{saved_date},"
 			+ "status=#{status},"
-			+ "user_id=#{user_id},"
-			+ "doc_id=#{doc_id} "
+			+ "user_id=#{user.user_id},"
+			+ "doc_id=#{doc.doc_id} "
 			+ "WHERE "
 			+ "sl_id=#{sl_id}";
 	@Update(U_SL)

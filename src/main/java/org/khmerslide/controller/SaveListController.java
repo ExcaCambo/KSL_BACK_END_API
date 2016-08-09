@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.khmerslide.entities.Document;
 import org.khmerslide.entities.Save_List;
+import org.khmerslide.entities.User;
 import org.khmerslide.model.InputDocument;
 import org.khmerslide.model.InputSave_List;
 import org.khmerslide.services.SaveListService;
@@ -52,12 +53,15 @@ public class SaveListController {
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
 			Save_List sl = new Save_List();
-			sl.setSl_id(savelist.getSl_id());
 			sl.setSl_name(savelist.getSl_name());
 			sl.setSaved_date(savelist.getSaved_date());
 			sl.setStatus(savelist.getStatus());
-			sl.setUser_id(savelist.getUser_id());
-			sl.setDoc_id(savelist.getDoc_id());
+				User u = new User();
+					u.setUser_id(u.getUser_id());
+			sl.setUser(u);
+				Document  d = new Document();
+					d.setDoc_id(d.getDoc_id());
+			sl.setDoc(d);
 			sl.setDescription(savelist.getDescription());
 			
 			if(savelistService.addSaveList(sl)){
@@ -76,10 +80,18 @@ public class SaveListController {
 		
 	}
 	
-	@RequestMapping(value={"/update-savelist"},method=RequestMethod.PUT, headers = "Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> updateSaveList(@RequestBody Save_List sl){
+	@RequestMapping(value={"/update-savelist/{sl_id}"},method=RequestMethod.PUT, headers = "Accept=Application/json")
+	public ResponseEntity<Map<String, Object>> updateSaveList(@PathVariable("sl_id") int sl_id,@RequestBody InputSave_List inputsl){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
+			Save_List sl = new Save_List();
+				sl.setSl_id(sl_id);
+				sl.setSl_name(inputsl.getSl_name());
+				sl.setStatus(inputsl.getStatus());
+					Document  d = new Document();
+						d.setDoc_id(d.getDoc_id());
+				sl.setDoc(d);
+				sl.setDescription(inputsl.getDescription());
 			if(savelistService.updateSaveList(sl)){
 				map.put("MESSAGE", "UPDATE SAVELIST");
 				map.put("STATUS", true);

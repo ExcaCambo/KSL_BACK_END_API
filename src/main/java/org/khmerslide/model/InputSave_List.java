@@ -1,22 +1,22 @@
 package org.khmerslide.model;
 
-import org.khmerslide.entities.Document;
-import org.khmerslide.entities.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class InputSave_List {
-	private int sl_id;
+
+	@JsonProperty("SL_NAME")
 	private String sl_name;
+	@JsonProperty("SAVED_DATE")
 	private String saved_date;
+	@JsonProperty("STATUS")
 	private int status;
+	@JsonProperty("USER_ID")
 	private int  user_id;
+	@JsonProperty("DOC_ID")
 	private int  doc_id;
+	@JsonProperty("DESCRIPTION")
 	private String description;
-	public int getSl_id() {
-		return sl_id;
-	}
-	public void setSl_id(int sl_id) {
-		this.sl_id = sl_id;
-	}
+
 	public String getSl_name() {
 		return sl_name;
 	}
@@ -53,5 +53,7 @@ public class InputSave_List {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	
 	
 }

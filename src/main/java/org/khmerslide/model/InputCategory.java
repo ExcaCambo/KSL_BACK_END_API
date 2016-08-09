@@ -3,7 +3,7 @@ package org.khmerslide.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class InputCategory {
-	
+	//Ido
 	private int cat_id;
 	private int parent_id;
 	private String cat_name;

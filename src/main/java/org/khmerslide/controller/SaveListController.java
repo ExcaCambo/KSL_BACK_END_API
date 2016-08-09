@@ -26,7 +26,7 @@ public class SaveListController {
 	private SaveListService  savelistService;
 	
 	@ResponseBody
-	@RequestMapping(method=RequestMethod.GET,headers="Accept=Application/json")
+	@RequestMapping(value={"/get-getsavelist"},method=RequestMethod.GET,headers="Accept=Application/json")
 	public ResponseEntity<Map<String, Object>> getSaveList(){
 		Map<String , Object> map = new HashMap<String , Object>();
 		try{
@@ -47,7 +47,7 @@ public class SaveListController {
 		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, headers="Accept=Application/json")
+	@RequestMapping(value={"/add-savelist"},method = RequestMethod.POST, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> addSaveList(@RequestBody InputSave_List savelist){
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
@@ -76,7 +76,7 @@ public class SaveListController {
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, headers = "Accept=Application/json")
+	@RequestMapping(value={"/update-savelist"},method=RequestMethod.PUT, headers = "Accept=Application/json")
 	public ResponseEntity<Map<String, Object>> updateSaveList(@RequestBody Save_List sl){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
@@ -97,7 +97,7 @@ public class SaveListController {
 	
 	
 	
-	@RequestMapping(value="/{sl_id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
+	@RequestMapping(value="/delete-savelist/{sl_id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> deleteUser(@PathVariable("sl_id") int sl_id){
 		Map<String , Object> map = new HashMap<String,Object>();
 		try{

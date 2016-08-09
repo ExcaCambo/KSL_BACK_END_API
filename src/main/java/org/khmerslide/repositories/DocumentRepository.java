@@ -13,6 +13,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DocumentRepository {
+	/*  Status 
+    1 active
+	2.disactive
+	3.delete
+	 */
 	String G_DOC="SELECT" 
 			+" d.doc_id,"
 			+" d.doc_title,"
@@ -31,7 +36,9 @@ public interface DocumentRepository {
 			+" ksl_document d"
 			+" INNER JOIN ksl_doc_type dt ON d.doc_type_id = dt.doc_type_id"  
 			+" INNER JOIN ksl_category ct ON d.cat_id = ct.cat_id"
-			+" INNER JOIN ksl_user u ON d.user_id = u.user_id";
+			+" INNER JOIN ksl_user u ON d.user_id = u.user_id"
+			+" WHERE"
+			+" d.status = 1";
 	@Select(G_DOC)
 	@Results(value={
 			@Result(property="doc.doc_name",column="doc_name"),
@@ -92,10 +99,11 @@ public interface DocumentRepository {
 	@Update(U_DOC)
 	public boolean updateDocument(Document doc);
 	
-	String D_DOC="DELETE FROM "
-			+ "ksl_document "
-			+ "WHERE "
-			+ "doc_id=#{doc_id}";
+	String D_DOC="UPDATE ksl_document"
+			+" SET"
+			+" status=2"
+			+" WHERE "
+			+" doc_id=#{doc_id}";
 	@Delete(D_DOC)
 	public boolean deleteDocument(int doc_id);
 }

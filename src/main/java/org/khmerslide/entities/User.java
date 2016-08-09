@@ -24,9 +24,6 @@ public class User {
 	@JsonProperty("ROLE")
 	private User_Type role;
 	
-	
-	
-	
 	public User_Type getRole() {
 		return role;
 	}

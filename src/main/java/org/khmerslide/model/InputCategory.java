@@ -5,7 +5,7 @@ import org.khmerslide.entities.User_Type;
 
 
 public class InputCategory {
-	
+	//Ido
 	private int cat_id;
 	private int parent_id;
 	private String cat_name;

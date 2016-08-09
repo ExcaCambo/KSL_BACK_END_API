@@ -1,5 +1,6 @@
 package org.khmerslide.model;
 
+import org.khmerslide.entities.User_Type;
 
 public class InputUser {
 	private int user_id;
@@ -11,8 +12,14 @@ public class InputUser {
 	private String photo;
 	private String description;
 	private int status = 2;
-	private int role_id = 2;
+	private User_Type role;
 	
+	public User_Type getRole() {
+		return role;
+	}
+	public void setRole(User_Type role) {
+		this.role = role;
+	}
 	public int getUser_id() {
 		return user_id;
 	}
@@ -67,11 +74,4 @@ public class InputUser {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public int getRole_id() {
-		return role_id;
-	}
-	public void setRole_id(int role_id) {
-		this.role_id = role_id;
-	}
-	
 }

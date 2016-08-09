@@ -24,7 +24,7 @@ public class UserController {
 	@Autowired
 	private UserService  userService;
 	@ResponseBody
-	@RequestMapping(method=RequestMethod.GET, headers="Accept=Application/json")
+	@RequestMapping(value={"/get-user"},method=RequestMethod.GET, headers="Accept=Application/json")
 	public ResponseEntity<Map<String, Object>> getUser(){
 		Map<String , Object> map = new HashMap<String , Object>();
 		try{
@@ -49,7 +49,7 @@ public class UserController {
 	
 	
 	
-	@RequestMapping(method = RequestMethod.POST, headers="Accept=Application/json")
+	@RequestMapping(value={"/add-user"},method = RequestMethod.POST, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> addUser(@RequestBody InputUser user){
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
@@ -65,7 +65,7 @@ public class UserController {
 			u.setStatus(user.getStatus());
 			//u.setRole_id(user.getRole_id());
 			User_Type  ut = new User_Type();
-					ut.setRole_id(user.getRole_id());
+					ut.setRole_id(user.getUser_id());
 			u.setRole(ut);
 			
 			if(userService.addUser(u)){
@@ -106,7 +106,7 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping(method=RequestMethod.PUT, headers = "Accept=Application/json")
+	@RequestMapping(value={"/update-user"},method=RequestMethod.PUT, headers = "Accept=Application/json")
 	public ResponseEntity<Map<String, Object>> updateUser(@RequestBody User user){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
@@ -125,7 +125,7 @@ public class UserController {
 		return new ResponseEntity<Map<String,Object>>(map , HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/{id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
+	@RequestMapping(value="/delete-user/{id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> deleteUser(@PathVariable("id") int id){
 		Map<String , Object> map = new HashMap<String,Object>();
 		try{

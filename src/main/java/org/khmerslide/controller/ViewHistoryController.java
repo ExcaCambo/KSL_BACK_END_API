@@ -24,7 +24,7 @@ public class ViewHistoryController {
 	@Autowired
 	private ViewHistoryService  viewhistoryService;
 	@ResponseBody
-	@RequestMapping(method=RequestMethod.GET,headers="Accept=Application/json")
+	@RequestMapping(value={"/get-viewhistory"},method=RequestMethod.GET,headers="Accept=Application/json")
 	public ResponseEntity<Map<String, Object>> getViewHistory(){
 		Map<String , Object> map = new HashMap<String , Object>();
 		try{
@@ -45,7 +45,7 @@ public class ViewHistoryController {
 		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, headers="Accept=Application/json")
+	@RequestMapping(value={"/add-viewhistory"},method = RequestMethod.POST, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> addViewHistory(@RequestBody InputView_History viewhistory){
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
@@ -72,7 +72,7 @@ public class ViewHistoryController {
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, headers = "Accept=Application/json")
+	@RequestMapping(value={"/update-viewhistory"},method=RequestMethod.PUT, headers = "Accept=Application/json")
 	public ResponseEntity<Map<String, Object>> updateViewHisotry(@RequestBody View_History vh){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
@@ -91,7 +91,7 @@ public class ViewHistoryController {
 		return new ResponseEntity<Map<String,Object>>(map , HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/{vh_id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
+	@RequestMapping(value="/delete-viewhistory/{vh_id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> deleteUser(@PathVariable("vh_id") int vh_id){
 		Map<String , Object> map = new HashMap<String,Object>();
 		try{

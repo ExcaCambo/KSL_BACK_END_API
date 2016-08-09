@@ -25,7 +25,7 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	@ResponseBody
-	@RequestMapping(method=RequestMethod.GET,headers="Accept=Application/json")
+	@RequestMapping(value={"/get-comment"},method=RequestMethod.GET,headers="Accept=Application/json")
 	public ResponseEntity<Map<String, Object>> getComment(){
 		Map<String , Object> map = new HashMap<String , Object>();
 		try{
@@ -47,7 +47,7 @@ public class CommentController {
 	}
 	
 	
-	@RequestMapping(method = RequestMethod.POST, headers="Accept=Application/json")
+	@RequestMapping(value={"/add-comment"},method = RequestMethod.POST, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> addComment(@RequestBody InputComment comment){
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
@@ -74,7 +74,7 @@ public class CommentController {
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, headers = "Accept=Application/json")
+	@RequestMapping(value={"/update-comment"},method=RequestMethod.PUT, headers = "Accept=Application/json")
 	public ResponseEntity<Map<String, Object>> updateComment(@RequestBody Comment comment){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
@@ -95,7 +95,7 @@ public class CommentController {
 	
 	
 	
-	@RequestMapping(value="/{cmt_id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
+	@RequestMapping(value="delete-comment/{cmt_id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> deleteCategory(@PathVariable("cmt_id") int cmt_id){
 		Map<String , Object> map = new HashMap<String,Object>();
 		try{

@@ -1,5 +1,6 @@
 package org.khmerslide.controller;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class CategoryController {
 	private CategoryService categoryService;
 	
 	@ResponseBody
-	@RequestMapping(method=RequestMethod.GET,headers="Accept=Application/json")
+	@RequestMapping(value={"/get-category"},method=RequestMethod.GET,headers="Accept=Application/json")
 	public ResponseEntity<Map<String, Object>> getCategory(){
 		Map<String , Object> map = new HashMap<String , Object>();
 		try{
@@ -47,20 +48,20 @@ public class CategoryController {
 	}
 	
 	
-	@RequestMapping(method = RequestMethod.POST, headers="Accept=Application/json")
-	public ResponseEntity<Map<String , Object>> addCategory(@RequestBody InputCategory category){
+	@RequestMapping(value={"/add-category"},method = RequestMethod.POST, headers="Accept=Application/json")
+	public ResponseEntity<Map<String , Object>> addCategory(@RequestBody InputCategory inputcategory){
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
 			Category cat = new Category();
-			cat.setCat_id(category.getCat_id());
-			cat.setParent_id(category.getParent_id());
-			cat.setCat_name(category.getCat_name());
-			cat.setCreated_date(category.getCreated_date());
-			cat.setStatus(category.getStatus());
+			cat.setCat_id(inputcategory.getCat_id());
+			cat.setParent_id(inputcategory.getParent_id());
+			cat.setCat_name(inputcategory.getCat_name());
+			cat.setCreated_date(inputcategory.getCreated_date());
+			cat.setStatus(inputcategory.getStatus());
 			User u = new User();
-				u.setUser_id(category.getU_id());
+				u.setUser_id(u.getUser_id());
 			cat.setUser(u);
-			cat.setDescription(category.getDescription());
+			cat.setDescription(inputcategory.getDescription());
 			if(categoryService.addCategory(cat)){
 				map.put("MESSAGE", "ADD CATEGORY");
 				map.put("STATUS", true);
@@ -77,7 +78,7 @@ public class CategoryController {
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, headers = "Accept=Application/json")
+	@RequestMapping(value={"/update-category"},method=RequestMethod.PUT, headers = "Accept=Application/json")
 	public ResponseEntity<Map<String, Object>> updateCategory(@RequestBody Category category){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
@@ -98,7 +99,7 @@ public class CategoryController {
 	
 	
 	
-	@RequestMapping(value="/{cat_id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
+	@RequestMapping(value="/delete-category/{cat_id}" , method = RequestMethod.PUT, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> deleteCategory(@PathVariable("cat_id") int cat_id){
 		Map<String , Object> map = new HashMap<String,Object>();
 		try{

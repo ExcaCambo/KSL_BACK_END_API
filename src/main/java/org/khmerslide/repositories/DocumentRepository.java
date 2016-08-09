@@ -13,6 +13,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DocumentRepository {
+	/*  Status 
+    1 active
+	2.disactive
+	3.delete
+	 */
 	String G_DOC="SELECT" 
 			+" d.doc_id,"
 			+" d.doc_title,"

@@ -11,6 +11,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CommentRepository {
+	/*  Status 
+    1 active
+	2.disactive
+	3.delete
+	 */
 	String G_CM="SELECT" 
 			+" C.cmt_id,"
 			+" C.cmt_text,"

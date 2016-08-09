@@ -12,6 +12,11 @@ import org.khmerslide.entities.Save_List;
 import org.springframework.stereotype.Repository;
 @Repository
 public interface SaveListRepository {
+	/*  Status 
+    1 active
+	2.disactive
+	3.delete
+	 */
 	String G_SL="SELECT"
 			+" S.sl_id,"
 			+" S.sl_name,"

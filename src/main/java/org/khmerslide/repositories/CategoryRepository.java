@@ -12,6 +12,11 @@ import org.khmerslide.entities.Category;
 import org.springframework.stereotype.Repository;
 @Repository
 public interface CategoryRepository {
+	/*  Status 
+    1 active
+	2.disactive
+	3.delete
+	 */
 	String G_C="SELECT "
 			+" CB.cat_id,"
 			+" C.cat_name,"

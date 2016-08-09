@@ -41,29 +41,29 @@ public interface UserRepositories {
 	})
 	public ArrayList<User> getUser();
 
-	String A_USER="INSERT INTO "
-					+ "ksl_user("
-					+ "user_id,"
-					+ "user_name,"
-					+ "gender,"
-					+ "email,"
-					+ "password,"
-					+ "registered_date,"
-					+ "photo,"
-					+ "description,"
-					+ "status,"
-					+ "role_id) "
-					+ "VALUES("
-					+ "#{user_id},"
-					+ "#{user_name},"
-					+ "#{gender},"
-					+ "#{email},"
-					+ "#{password},"
-					+ "#{registered_date},"
-					+ "#{photo},"
-					+ "#{description},"
-					+ "#{status},"
-					+ "#{role_id.role_id})"; 
+	String A_USER="INSERT INTO"
+					+" ksl_user("
+					+" user_id,"
+					+" user_name,"
+					+" gender,"
+					+" email,"
+					+" password,"
+					+" registered_date,"
+					+" photo,"
+					+" description,"
+					+" status,"
+					+" role_id) "
+					+" VALUES("
+					+" #{user_id},"
+					+" #{user_name},"
+					+" #{gender},"
+					+" #{email},"
+					+" #{password},"
+					+" #{registered_date},"
+					+" #{photo},"
+					+" #{description},"
+					+" #{status},"
+					+" #{role.role_id})"; 
 	@Insert(A_USER)
 	public boolean addUser(User user);
 	
@@ -89,7 +89,7 @@ public interface UserRepositories {
 					+ "photo=#{photo},"
 					+ "description=#{description},"
 					+ "status=#{status},"
-					+ "role_id=#{role_id.role_id} "
+					+ "role_id=#{role.role_id} "
 					+ "WHERE "
 					+ "user_id=#{user_id}";
 	@Update(U_USER)

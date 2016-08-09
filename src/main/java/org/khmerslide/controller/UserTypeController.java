@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/api/user-type")
+@RequestMapping(value="/api/user-type")
 public class UserTypeController {
 	@Autowired
 	private UserTypeService  userTypeService;

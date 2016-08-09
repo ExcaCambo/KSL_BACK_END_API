@@ -39,7 +39,7 @@ public interface DocumentRepository {
 			+" FULL JOIN ksl_category ct ON d.cat_id = ct.cat_id"
 			+" FULL JOIN ksl_user u ON d.user_id = u.user_id"
 			+" WHERE"
-			+" d.status = 1";
+			+" d.status = 1 ";
 	@Select(G_DOC)
 	@Results(value={
 			@Result(property="doc.doc_name",column="doc_name"),

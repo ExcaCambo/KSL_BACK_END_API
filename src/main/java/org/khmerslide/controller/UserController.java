@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-//idovbcb
 
 @Controller
 @RequestMapping("/api/user")
@@ -52,11 +51,10 @@ public class UserController {
 	
 	
 	@RequestMapping(value={"/add-user"},method = RequestMethod.POST, headers="Accept=Application/json")
-	public ResponseEntity<Map<String , Object>> addUser(@RequestBody InputUser user){
+	public ResponseEntity<Map<String , Object>> addUser(@RequestBody InputUser.InsertUser user){
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
 			User u = new User();
-			u.setUser_id(user.getUser_id());
 			u.setUser_name(user.getUser_name());
 			u.setGender(user.getGender());
 			u.setEmail(user.getEmail());
@@ -65,9 +63,8 @@ public class UserController {
 			u.setPhoto(user.getPhoto());
 			u.setDescription(user.getDescription());
 			u.setStatus(user.getStatus());
-			//u.setRole_id(user.getRole_id());
 			User_Type  ut = new User_Type();
-					ut.setRole_id(user.getUser_id());
+					ut.setRole_id(ut.getRole_id());
 			u.setRole(ut);
 			
 			if(userService.addUser(u)){
@@ -87,7 +84,7 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping(value="/{status}" ,method = RequestMethod.POST, headers="Accept=Application/json")
+	/*@RequestMapping(value="/{status}" ,method = RequestMethod.POST, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> setApproveByAdmin(@PathVariable("status") int status){
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
@@ -106,13 +103,24 @@ public class UserController {
 		return new ResponseEntity<Map<String,Object>>(map , HttpStatus.OK);
 		
 	}
+	*/
 	
-	
-	@RequestMapping(value={"/update-user"},method=RequestMethod.PUT, headers = "Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> updateUser(@RequestBody User user){
+	@RequestMapping(value={"/update-user/{user_id}"},method=RequestMethod.PUT, headers = "Accept=Application/json")
+	public ResponseEntity<Map<String, Object>> updateUser(@PathVariable("user_id") int user_id,@RequestBody InputUser.UpdateUser updateuser){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
-			if(userService.updateUser(user)){
+			User U = new User();
+			U.setUser_id(user_id);
+			U.setUser_name(updateuser.getUser_name());
+			U.setGender(updateuser.getGender());
+			U.setEmail(updateuser.getEmail());
+			U.setPassword(updateuser.getPassword());
+			U.setPhoto(updateuser.getPhoto());
+			U.setDescription(updateuser.getDescription());
+				User_Type  ut =new User_Type();
+					ut.setRole_id(ut.getRole_id());
+			U.setRole(ut);
+			if(userService.updateUser(U)){
 				map.put("MESSAGE", "USER UPDATE");
 				map.put("STATUS", true);
 			}else{
@@ -127,11 +135,11 @@ public class UserController {
 		return new ResponseEntity<Map<String,Object>>(map , HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/delete-user/{id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
-	public ResponseEntity<Map<String , Object>> deleteUser(@PathVariable("id") int id){
+	@RequestMapping(value="/delete-user/{user_id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
+	public ResponseEntity<Map<String , Object>> deleteUser(@PathVariable("user_id") int user_id){
 		Map<String , Object> map = new HashMap<String,Object>();
 		try{
-			if(userService.deleteUser(id)){
+			if(userService.deleteUser(user_id)){
 				map.put("MESSAGE", "USER DELETE");
 				map.put("STATUS" , true);
 			}else{

@@ -40,7 +40,6 @@ public interface CategoryRepository {
 	
 	String A_C="INSERT INTO"
 			+" ksl_category("
-			+" cat_id,"
 			+" parent_id,"
 			+" cat_name,"
 			+" created_date,"
@@ -49,7 +48,6 @@ public interface CategoryRepository {
 			+" description,"
 			+" icon)"
 			+" VALUES("
-			+" #{cat_id},"
 			+" #{parent.cat_id},"
 			+" #{cat_name},"
 			+" #{created_date},"

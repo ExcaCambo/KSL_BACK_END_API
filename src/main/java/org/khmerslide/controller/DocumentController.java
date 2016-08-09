@@ -1,6 +1,6 @@
 package org.khmerslide.controller;
 
-import java.util.ArrayList;
+import java.util.ArrayList;import java.util.DuplicateFormatFlagsException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,11 +50,10 @@ public class DocumentController {
 	}
 	
 	@RequestMapping(value={"/add-ducument"},method = RequestMethod.POST, headers="Accept=Application/json")
-	public ResponseEntity<Map<String , Object>> addDocument(@RequestBody InputDocument document){
+	public ResponseEntity<Map<String , Object>> addDocument(@RequestBody InputDocument.insertDocument document){
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
 			Document doc = new Document();
-			doc.setDoc_id(document.getDoc_id());
 			doc.setDoc_title(document.getDoc_title());
 			doc.setUploaded_date(document.getUploaded_date());
 			doc.setUrl(document.getUrl());
@@ -64,7 +63,7 @@ public class DocumentController {
 			doc.setDescription(document.getDescription());
 			doc.setStatus(document.getStatus());
 			Doc_Type dt = new Doc_Type();
-				dt.setDoc_type(document.getDoc_id());
+				dt.setDoc_type(document.getDoc_type_id());
 			doc.setDoc(dt);
 			User u = new User();
 				u.setUser_id(document.getUser_id());
@@ -91,11 +90,27 @@ public class DocumentController {
 		
 	}
 	
-	@RequestMapping(value={"/update-document"},method=RequestMethod.PUT, headers = "Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> updateDocument(@RequestBody Document document){
+	@RequestMapping(value={"/update-document/{doc_id}"},method=RequestMethod.PUT, headers = "Accept=Application/json")
+	public ResponseEntity<Map<String, Object>> updateDocument(@PathVariable("doc_id") int doc_id,@RequestBody InputDocument.UpdateDocument document){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
-			if(documentService.updateDocument(document)){
+			Document  doc = new Document();
+			doc.setDoc_id(doc_id); //set doc id  
+			doc.setDoc_title(document.getDoc_title());
+			doc.setStatus(document.getStatus());
+				Doc_Type dt = new Doc_Type();
+				dt.setDoc_type(dt.getDoc_type());
+			doc.setDoc(dt);
+				User  u = new User();
+					u.setUser_id(document.getUser_id());
+			doc.setUser(u);
+				Category c = new Category();
+					c.setCat_id(c.getCat_id());
+			doc.setCat(c);
+			doc.setThumbnail(document.getThumbnail());
+			doc.setSource(document.getSource());
+			
+			if(documentService.updateDocument(doc)){
 				map.put("MESSAGE", "UPDATE DOCUMENT");
 				map.put("STATUS", true);
 			}else{

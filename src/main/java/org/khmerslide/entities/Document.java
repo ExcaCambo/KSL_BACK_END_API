@@ -26,7 +26,7 @@ public class Document {
 	@JsonProperty("USER")
 	private User user;
 	@JsonProperty("CATEGORY")
-	private Category  cat;
+	private Category cat;
 	@JsonProperty("THUMBNAIL")
 	private String thumbnail;
 	@JsonProperty("SOURCE")

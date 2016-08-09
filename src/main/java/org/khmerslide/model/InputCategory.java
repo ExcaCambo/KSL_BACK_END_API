@@ -3,15 +3,23 @@ package org.khmerslide.model;
 import org.khmerslide.entities.User;
 import org.khmerslide.entities.User_Type;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class InputCategory {
 	//Ido
-	private int cat_id;
+/*	private int cat_id;*/
+	@JsonProperty("PARENT")
 	private int parent_id;
+	@JsonProperty("CAT_NAME")
 	private String cat_name;
+	@JsonProperty("STATUS")
 	private int status;
+	@JsonProperty("USER")
 	private int  user_id;
+	@JsonProperty("DESCRIPTION")
 	private String description;
+	@JsonProperty("ICON")
 	private String icon;
 	
 	public String getIcon() {
@@ -19,12 +27,6 @@ public class InputCategory {
 	}
 	public void setIcon(String icon) {
 		this.icon = icon;
-	}
-	public int getCat_id() {
-		return cat_id;
-	}
-	public void setCat_id(int cat_id) {
-		this.cat_id = cat_id;
 	}
 	public int getParent_id() {
 		return parent_id;

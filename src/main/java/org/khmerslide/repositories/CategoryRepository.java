@@ -12,18 +12,24 @@ import org.khmerslide.entities.Category;
 import org.springframework.stereotype.Repository;
 @Repository
 public interface CategoryRepository {
+	/*  Status 
+    1 active
+	2.disactive
+	3.delete
+	 */
 	String G_C="SELECT "
 			+" CB.cat_id,"
-			+" S.cat_name,"
+			+" C.cat_name,"
 			+" CB.cat_name,"
 			+" CB.created_date,"
 			+" CB.status,"
 			+" U.user_name,"
 			+" CB.description,"
 			+" CB.icon"
-			+" FROM  ksl_category S"
-			+" INNER JOIN ksl_category CB ON S.cat_id = CB.parent_id"
-			+" INNER JOIN ksl_user U ON S.user_id = U.user_id";
+			+" FROM  ksl_category C"
+			+" INNER JOIN ksl_category CB ON C.cat_id = CB.parent_id"
+			+" INNER JOIN ksl_user U ON C.user_id = U.user_id"
+			+" WHERE CB.status=1";
 	@Select(G_C)
 	@Results(value={
 			@Result(property="user.user_name", column="user_name")
@@ -62,10 +68,14 @@ public interface CategoryRepository {
 			+ "cat_id=#{cat_id}";
 	@Update(U_C)
 	public boolean updateCategory(Category category);
+			
 	
-	String D_C="DELETE FROM ksl_category "
-			+ "WHERE "
-			+ "cat_id=#{cat_id}";
+	
+	String D_C="UPDATE ksl_category"
+			 +" SET"
+			 +" status=2"
+			 +" WHERE"
+			 +" cat_id=#{cat_id}";
 	@Delete(D_C)
 	public boolean deleteCategory(int cat_id);
 }

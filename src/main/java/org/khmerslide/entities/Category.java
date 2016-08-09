@@ -18,6 +18,7 @@ public class Category {
 	@JsonProperty("DESCRIPTION")
 	private String description;
 	
+	
 	public User getUser() {
 		return user;
 	}

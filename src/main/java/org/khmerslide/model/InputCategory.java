@@ -1,6 +1,8 @@
 package org.khmerslide.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.khmerslide.entities.User;
+import org.khmerslide.entities.User_Type;
+
 
 public class InputCategory {
 	//Ido
@@ -9,7 +11,7 @@ public class InputCategory {
 	private String cat_name;
 	private String created_date;
 	private int status;
-	private int  u_id;
+	private User  User;
 	private String description;
 	
 	public int getCat_id() {
@@ -42,17 +44,16 @@ public class InputCategory {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public int getU_id() {
-		return u_id;
-	}
-	public void setU_id(int u_id) {
-		this.u_id = u_id;
-	}
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+	public User getUser() {
+		return User;
+	}
+	public void setUser(User user) {
+		User = user;
+	}
 }

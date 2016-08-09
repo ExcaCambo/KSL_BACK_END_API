@@ -11,15 +11,23 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CommentRepository {
-	String G_CM="SELECT "
-			+ "cmt_id,"
-			+ "cmt_text,"
-			+ "cmt_date,"
-			+ "status,"
-			+ "user_id,"
-			+ "doc_id "
-			+ "FROM "
-			+ "ksl_comment";
+	/*  Status 
+    1 active
+	2.disactive
+	3.delete
+	 */
+	String G_CM="SELECT" 
+			+" C.cmt_id,"
+			+" C.cmt_text,"
+			+" C.cmt_date,"
+			+" C.status,"
+			+" U.user_id,"
+			+" D.doc_id" 
+			+" FROM" 
+			+" ksl_comment C"
+			+" INNER JOIN ksl_user U ON C.user_id = U.user_id"
+			+" INNER JOIN ksl_document D ON C.doc_id = D.doc_id"
+			+" WHERE C.status = 1 ";
 	@Select(G_CM)
 	public ArrayList<Comment> getComment();
 	String A_CM="INSERT INTO "
@@ -51,9 +59,10 @@ public interface CommentRepository {
 	@Update(U_CM)
 	public boolean updateComment(Comment comment);
 	
-	String D_CM="DELETE FROM ksl_comment "
-			+ "WHERE "
-			+ "cmt_id=#{cmt_id}";
+	String D_CM="UPDATE ksl_comment"
+			+" SET"
+			+" status=2"
+			+" cmt_id=#{cmt_id}";
 	@Delete(D_CM)
 	public boolean deleteComment(int cmt_id);
 }

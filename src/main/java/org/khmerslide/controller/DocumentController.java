@@ -28,7 +28,7 @@ public class DocumentController {
 	private DocumentService documentService;
 	
 	@ResponseBody
-	@RequestMapping(method=RequestMethod.GET,headers="Accept=Application/json")
+	@RequestMapping(value={"/get-document"},method=RequestMethod.GET,headers="Accept=Application/json")
 	public ResponseEntity<Map<String, Object>> getDocument(){
 		Map<String , Object> map = new HashMap<String , Object>();
 		try{
@@ -49,7 +49,7 @@ public class DocumentController {
 		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, headers="Accept=Application/json")
+	@RequestMapping(value={"/add-ducument"},method = RequestMethod.POST, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> addDocument(@RequestBody InputDocument document){
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
@@ -91,7 +91,7 @@ public class DocumentController {
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, headers = "Accept=Application/json")
+	@RequestMapping(value={"/update-document"},method=RequestMethod.PUT, headers = "Accept=Application/json")
 	public ResponseEntity<Map<String, Object>> updateDocument(@RequestBody Document document){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
@@ -112,7 +112,7 @@ public class DocumentController {
 	
 	
 	
-	@RequestMapping(value="/{doc_id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
+	@RequestMapping(value="/delete-document/{doc_id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> deleteUser(@PathVariable("doc_id") int doc_id){
 		Map<String , Object> map = new HashMap<String,Object>();
 		try{

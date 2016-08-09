@@ -15,11 +15,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepositories {
 	
-	/*  1 active
+	/*  Status 
+	    1 active
 		2.disactive
 		3.delete
 	*/
-	String G_USER="SELECT "
+	String G_USER="SELECT"
 				+" U.user_id,"
 				+" U.user_name,"
 				+" U.gender,"
@@ -33,7 +34,7 @@ public interface UserRepositories {
 				+" FROM "
 				+" ksl_user U"
 				+" INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id"
-				+" WHERE U.status != 3";
+				+" WHERE U.status =1";
 	@Select(G_USER)
 	@Results(value={
 			@Result(property="role.role_name", column="role_name")

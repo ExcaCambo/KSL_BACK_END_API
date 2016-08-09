@@ -12,28 +12,24 @@ import org.khmerslide.entities.Save_List;
 import org.springframework.stereotype.Repository;
 @Repository
 public interface SaveListRepository {
-	/*String G_SL="SELECT "
-				+"SL.sl_id,"
-				+"SL.sl_name,"
-				+"SL.saved_date,"
-				+"SL.status,"
-				+"U.user_id,"
-				+"D.doc_id,"
-				+"SL.description "
-				+"FROM "
-				+"ksl_save_list SL "
-				+"INNER JOIN ksl_user U ON U.user_id = SL.user_id  "
-				+"INNER JOIN ksl_document D ON D.user_id = U.user_id";*/
-	String G_SL="SELECT "
-			+"sl_id,"
-			+"sl_name,"
-			+"saved_date,"
-			+"status,"
-			+"user_id,"
-			+"doc_id,"
-			+"description "
-			+"FROM "
-			+"ksl_save_list";
+	/*  Status 
+    1 active
+	2.disactive
+	3.delete
+	 */
+	String G_SL="SELECT"
+			+" S.sl_id,"
+			+" S.sl_name,"
+			+" S.saved_date,"
+			+" S.status,"
+			+" U.user_id,"
+			+" D.doc_id,"
+			+" S.description"
+			+" FROM"
+			+" ksl_save_list S"
+			+" INNER JOIN ksl_user U ON  S.user_id = U.user_id"
+			+" INNER JOIN ksl_document D ON S.doc_id = D.doc_id"
+			+" WHERE S.status = 1";
 	@Select(G_SL)
 	/*@Results(value={
 			@Result(property="sl_id",column="sl_id"),
@@ -74,9 +70,11 @@ public interface SaveListRepository {
 			+ "sl_id=#{sl_id}";
 	@Update(U_SL)
 	public boolean updateSaveList(Save_List savelist);
-	String D_SL="DELETE FROM ksl_save_list "
-			+ "WHERE "
-			+ "sl_id=#{sl_id}";
+	String D_SL="UPDATE ksl_save_list"
+			+" SET"
+			+" status=2"
+			+" WHERE"
+			+" sl_id=#{sl_id}";
 	@Delete(D_SL)
 	public boolean deleteSaveList(int savelist);
 	

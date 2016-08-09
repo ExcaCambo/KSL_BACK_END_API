@@ -11,6 +11,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ViewHistoryRepository {
+	/*  Status 
+    1 active
+	2.disactive
+	3.delete
+	 */
 	String G_VH="SELECT "
 			+ "vh_id,"
 			+ "added_date,"

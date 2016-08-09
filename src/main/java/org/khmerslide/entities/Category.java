@@ -17,8 +17,15 @@ public class Category {
 	private User  user;
 	@JsonProperty("DESCRIPTION")
 	private String description;
+	@JsonProperty("ICON")
+	private String icon;
 	
-	
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 	public User getUser() {
 		return user;
 	}

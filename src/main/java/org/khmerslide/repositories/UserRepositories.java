@@ -34,7 +34,7 @@ public interface UserRepositories {
 				+" FROM "
 				+" ksl_user U"
 				+" INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id"
-				+" WHERE U.status =1";
+				+" WHERE U.status=1";
 	@Select(G_USER)
 	@Results(value={
 			@Result(property="role.role_name", column="role_name")
@@ -95,10 +95,11 @@ public interface UserRepositories {
 	@Update(U_USER)
 	public boolean updateUser(User user);
 
-	String D_USER="DELETE FROM "
-					+ "ksl_user "
-					+ "WHERE "
-					+ "user_id=#{id}";
+	String D_USER="UPDATE ksl_user"
+				 +" SET"
+				 +" status=2"
+				 +" WHERE"
+				 +" user_id=#{id}";
 	@Delete(D_USER)
 	public boolean deleteUser(int id);
 

@@ -11,9 +11,16 @@ public class InputCategory {
 	private String cat_name;
 	private String created_date;
 	private int status;
-	private User  User;
+	private User  user;
 	private String description;
+	private String icon;
 	
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 	public int getCat_id() {
 		return cat_id;
 	}
@@ -51,9 +58,9 @@ public class InputCategory {
 		this.description = description;
 	}
 	public User getUser() {
-		return User;
+		return user;
 	}
 	public void setUser(User user) {
-		User = user;
+		user = user;
 	}
 }

@@ -58,10 +58,11 @@ public class CategoryController {
 			cat.setCat_name(inputcategory.getCat_name());
 			cat.setCreated_date(inputcategory.getCreated_date());
 			cat.setStatus(inputcategory.getStatus());
-			User u = new User();
-				u.setUser_id(u.getUser_id());
+				User u = new User();
+					u.setUser_id(u.getUser_id());
 			cat.setUser(u);
 			cat.setDescription(inputcategory.getDescription());
+			cat.setIcon(inputcategory.getIcon());
 			if(categoryService.addCategory(cat)){
 				map.put("MESSAGE", "ADD CATEGORY");
 				map.put("STATUS", true);

@@ -12,24 +12,24 @@ import org.khmerslide.entities.Category;
 import org.springframework.stereotype.Repository;
 @Repository
 public interface CategoryRepository {
-	/*  Status 
-    1 active
-	2.disactive
-	3.delete
+	/*Status 
+      1 active
+	  2.disactive
+	  3.delete
 	 */
-	String G_C="SELECT "
-			+" CB.cat_id,"
-			+" C.cat_name,"
-			+" CB.cat_name,"
-			+" CB.created_date,"
-			+" CB.status,"
-			+" U.user_name,"
-			+" CB.description,"
-			+" CB.icon"
-			+" FROM  ksl_category C"
-			+" INNER JOIN ksl_category CB ON C.cat_id = CB.parent_id"
-			+" INNER JOIN ksl_user U ON C.user_id = U.user_id"
-			+" WHERE CB.status=1";
+	String G_C="SELECT" 
+			 +" CB.cat_id," 
+			 +" CB.cat_name," 
+			 +" C.cat_name AS PARENT," 
+			 +" CB.created_date," 
+			 +" CB.status," 
+			 +" U.user_name," 
+			 +" CB.description," 
+			 +" CB.icon" 
+			 +" FROM  ksl_category C" 
+			 +" FULL JOIN ksl_category CB ON C.cat_id = CB.parent_id" 
+			 +" FULL JOIN ksl_user U ON U.user_id= CB.user_id" 
+			 +" WHERE CB.status !=3";
 	@Select(G_C)
 	@Results(value={
 			@Result(property="user.user_name", column="user_name")
@@ -37,35 +37,41 @@ public interface CategoryRepository {
 	public ArrayList<Category> getCategory();
 	
 	
-	String A_C="INSERT INTO "
-			+ "ksl_category("
-			+ "cat_id,"
-			+ "parent_id,"
-			+ "cat_name,"
-			+ "created_date,"
-			+ "status,"
-			+ "user_id,"
-			+ "description) "
-			+ "VALUES("
-			+ "#{cat_id},"
-			+ "#{parent_id},"
-			+ "#{cat_name},"
-			+ "#{created_date},"
-			+ "#{status},"
-			+ "#{user_id},"
-			+ "#{description})";
+	String A_C="INSERT INTO"
+			+" ksl_category("
+			+" cat_id,"
+			+" parent_id,"
+			+" cat_name,"
+			+" created_date,"
+			+" status,"
+			+" user_id,"
+			+" description,"
+			+" icon)"
+			+" VALUES("
+			+" #{cat_id},"
+			+" #{parent_id},"
+			+" #{cat_name},"
+			+" #{created_date},"
+			+" #{status},"
+			+" #{user.user_id},"
+			+" #{description},"
+			+ "#{icon})";
 	@Insert(A_C)
+	@Results(value={
+			@Result(property="user.user_id", column="user_id")
+	})
 	public boolean addCategory(Category category);
 	
-	String U_C="UPDATE ksl_category SET "
-			+ "parent_id=#{parent_id},"
-			+ "cat_name=#{cat_name},"
-			+ "created_date=#{created_date},"
-			+ "status=#{status},"
-			+ "user_id=#{user_id},"
-			+ "description=#{description} "
-			+ "WHERE "
-			+ "cat_id=#{cat_id}";
+	String U_C="UPDATE ksl_category SET"
+			+" parent_id=#{parent_id},"
+			+" cat_name=#{cat_name},"
+			+" created_date=#{created_date},"
+			+" status=#{status},"
+			+" user_id=#{user.user_id},"
+			+" description=#{description},"
+			+" icon=#{icon}"
+			+" WHERE"
+			+" cat_id=#{cat_id}";
 	@Update(U_C)
 	public boolean updateCategory(Category category);
 			

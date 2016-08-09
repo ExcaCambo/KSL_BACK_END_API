@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Category {
 	@JsonProperty("CAT_ID")
 	private int cat_id;
-	@JsonProperty("PARENT_ID")
-	private int parent_id;
+	@JsonProperty("PARENT")
+	private Category parent;
 	@JsonProperty("CAT_NAME")
 	private String cat_name;
 	@JsonProperty("CREATED_DATE")
@@ -38,12 +38,6 @@ public class Category {
 	public void setCat_id(int cat_id) {
 		this.cat_id = cat_id;
 	}
-	public int getParent_id() {
-		return parent_id;
-	}
-	public void setParent_id(int parent_id) {
-		this.parent_id = parent_id;
-	}
 	public String getCat_name() {
 		return cat_name;
 	}
@@ -68,6 +62,12 @@ public class Category {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+	public Category getParent() {
+		return parent;
+	}
+	public void setParent(Category parent) {
+		this.parent = parent;
+	}
+
 	
 }

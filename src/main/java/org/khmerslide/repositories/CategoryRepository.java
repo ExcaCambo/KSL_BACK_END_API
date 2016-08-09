@@ -32,7 +32,8 @@ public interface CategoryRepository {
 			 +" WHERE CB.status !=3";
 	@Select(G_C)
 	@Results(value={
-			@Result(property="user.user_name", column="user_name")
+			@Result(property="user.user_name", column="user_name"),
+			@Result(property="parent.cat_name", column="PARENT")
 	})
 	public ArrayList<Category> getCategory();
 	
@@ -49,7 +50,7 @@ public interface CategoryRepository {
 			+" icon)"
 			+" VALUES("
 			+" #{cat_id},"
-			+" #{parent_id},"
+			+" #{parent.cat_id},"
 			+" #{cat_name},"
 			+" #{created_date},"
 			+" #{status},"
@@ -63,7 +64,7 @@ public interface CategoryRepository {
 	public boolean addCategory(Category category);
 	
 	String U_C="UPDATE ksl_category SET"
-			+" parent_id=#{parent_id},"
+			+" parent_id=#{parent.cat_id},"
 			+" cat_name=#{cat_name},"
 			+" created_date=#{created_date},"
 			+" status=#{status},"

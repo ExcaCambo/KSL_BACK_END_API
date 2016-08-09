@@ -1,13 +1,31 @@
 package org.khmerslide.model;
 
 
+
+import org.khmerslide.entities.Document;
+import org.khmerslide.entities.User;
+
 public class InputComment {
 	private int cmt_id;
 	private String cmt_text;
 	private String cmt_date;
 	private int status;
-	private int u_id;
-	private int  doc_id;
+	private User user;
+	private Document  doc;
+	
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Document getDoc() {
+		return doc;
+	}
+	public void setDoc(Document doc) {
+		this.doc = doc;
+	}
 	public int getCmt_id() {
 		return cmt_id;
 	}
@@ -32,17 +50,6 @@ public class InputComment {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public int getU_id() {
-		return u_id;
-	}
-	public void setU_id(int u_id) {
-		this.u_id = u_id;
-	}
-	public int getDoc_id() {
-		return doc_id;
-	}
-	public void setDoc_id(int doc_id) {
-		this.doc_id = doc_id;
-	}
+	
 	
 }

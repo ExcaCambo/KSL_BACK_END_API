@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.khmerslide.entities.Category;
 import org.khmerslide.entities.Comment;
+import org.khmerslide.entities.Document;
+import org.khmerslide.entities.User;
 import org.khmerslide.model.InputCategory;
 import org.khmerslide.model.InputComment;
 import org.khmerslide.services.CommentService;
@@ -56,8 +58,13 @@ public class CommentController {
 			com.setCmt_text(comment.getCmt_text());
 			com.setCmt_date(comment.getCmt_date());
 			com.setStatus(comment.getStatus());
-			com.setUser_id(comment.getU_id());
-			com.setDoc_id(comment.getDoc_id());
+				User  u = new User();
+					u.setUser_id(u.getUser_id());
+			com.setUser(u);
+				Document  doc = new Document();
+					doc.setDoc_id(doc.getDoc_id());
+			com.setDoc(doc);
+			
 			if(commentService.addComment(com)){
 				map.put("MESSAGE", "ADD COMMENT");
 				map.put("STATUS", true);

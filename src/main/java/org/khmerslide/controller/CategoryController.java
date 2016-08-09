@@ -49,17 +49,23 @@ public class CategoryController {
 	
 	
 	@RequestMapping(value={"/add-category"},method = RequestMethod.POST, headers="Accept=Application/json")
-	public ResponseEntity<Map<String , Object>> addCategory(@RequestBody InputCategory inputcategory){
+	public ResponseEntity<Map<String , Object>> addCategory(@RequestBody InputCategory.InsertCategory inputcategory){
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
 			Category cat = new Category();
 			cat.setCat_id(inputcategory.getCat_id());
-			cat.setParent_id(inputcategory.getParent_id());
+			Category parentCategory = new Category();
+			
+			parentCategory.setCat_id(inputcategory.getParent_id());
+			
+			cat.setParent(parentCategory);
 			cat.setCat_name(inputcategory.getCat_name());
 			cat.setCreated_date(inputcategory.getCreated_date());
 			cat.setStatus(inputcategory.getStatus());
-				User u = new User();
-					u.setUser_id(u.getUser_id());
+			
+			User u = new User();
+			u.setUser_id(inputcategory.getUser_id());
+			
 			cat.setUser(u);
 			cat.setDescription(inputcategory.getDescription());
 			cat.setIcon(inputcategory.getIcon());
@@ -79,11 +85,18 @@ public class CategoryController {
 		
 	}
 	
-	@RequestMapping(value={"/update-category"},method=RequestMethod.PUT, headers = "Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> updateCategory(@RequestBody Category category){
+	@RequestMapping(value={"/update-category/{cat_id}"},method=RequestMethod.PUT, headers = "Accept=Application/json")
+	public ResponseEntity<Map<String, Object>> updateCategory(@PathVariable("cat_id") int cat_id,@RequestBody InputCategory.UpdateCategory updateCategory){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
-			if(categoryService.updateCategory(category)){
+			Category  cat = new Category();
+			cat.setCat_id(cat_id);
+			cat.setCat_name(updateCategory.getCat_name());
+				Category parentCategory = new Category();
+				parentCategory.setCat_id(updateCategory.getParent_id());
+			cat.setParent(parentCategory);
+			
+			if(categoryService.updateCategory(cat)){
 				map.put("MESSAGE", "UPDATE CATEGORY");
 				map.put("STATUS", true);
 			}else{
@@ -100,7 +113,7 @@ public class CategoryController {
 	
 	
 	
-	@RequestMapping(value="/delete-category/{cat_id}" , method = RequestMethod.PUT, headers="Accept=Application/json")
+	@RequestMapping(value={"/delete-category/{cat_id}"}, method = RequestMethod.DELETE, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> deleteCategory(@PathVariable("cat_id") int cat_id){
 		Map<String , Object> map = new HashMap<String,Object>();
 		try{

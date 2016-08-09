@@ -70,8 +70,7 @@ public interface CategoryRepository {
 	public boolean updateCategory(Category category);
 			
 	
-	/*Delete Category have been done*/
-	static int status=2;
+	
 	String D_C="UPDATE ksl_category"
 			 +" SET"
 			 +" status=2"

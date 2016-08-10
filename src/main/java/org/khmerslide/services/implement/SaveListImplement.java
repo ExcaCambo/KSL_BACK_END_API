@@ -32,4 +32,9 @@ public class SaveListImplement implements  SaveListService {
 		return savelistRepository.updateSaveList(sl);
 	}
 
+	@Override
+	public ArrayList<Save_List> getSaveListById(int sl_id) {
+		return savelistRepository.getSaveListById(sl_id);
+	}
+
 }

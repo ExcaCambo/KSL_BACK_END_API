@@ -1,5 +1,6 @@
 package org.khmerslide.repositories;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Delete;
@@ -37,6 +38,27 @@ public interface CategoryRepository {
 	})
 	public ArrayList<Category> getCategory();
 	
+	String G_CBI="SELECT"
+			 +" CB.cat_id,"
+			 +" CB.cat_name," 
+			 +" C.cat_name AS PARENT," 
+			 +" CB.created_date," 
+			 +" CB.status," 
+			 +" U.user_name," 
+			 +" CB.description," 
+			 +" CB.icon" 
+			 +" FROM  ksl_category C" 
+			 +" FULL JOIN ksl_category CB ON C.cat_id = CB.parent_id" 
+			 +" FULL JOIN ksl_user U ON U.user_id= CB.user_id" 
+			 +" WHERE CB.status !=3"
+			 +" AND"
+			 +" CB.cat_id=#{id}";
+	@Select(G_CBI)
+	@Results(value={
+			@Result(property="user.user_name", column="user_name"),
+			@Result(property="parent.cat_name", column="PARENT")
+	})
+	public ArrayList<Category> getCategoryById(int id);
 	
 	String A_C="INSERT INTO"
 			+" ksl_category("
@@ -60,6 +82,21 @@ public interface CategoryRepository {
 			@Result(property="user.user_id", column="user_id")
 	})
 	public boolean addCategory(Category category);
+	
+	Category  Cate = new Category();
+	//catch value by id in row table cateogry
+	String SQL="SELECT"
+			+" parent_id,"
+			+" cate_name,"
+			+" status,"
+			+" description,"
+			+" icon,"
+			+" FROM"
+			+" ksl_category,"
+			+" WHERE"
+			+" cate_id=#{cate_id}";
+	
+			
 	
 	String U_C="UPDATE ksl_category SET"
 			+" parent_id=#{parent.cat_id},"

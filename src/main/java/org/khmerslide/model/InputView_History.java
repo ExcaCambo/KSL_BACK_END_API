@@ -1,21 +1,26 @@
 package org.khmerslide.model;
 
-import org.khmerslide.entities.Document;
-import org.khmerslide.entities.User;
+
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class InputView_History {
-	private int vh_id;
+	@JsonProperty("ADDED_DATE")
 	private String added_date;
+	@JsonProperty("USER_ID")
 	private int  user_id;
+	@JsonProperty("DOC_ID")
 	private int  doc_id;
+	@JsonProperty("DESCRIPTION")
 	private String description;
+	@JsonProperty("STATUS")
+	private int status;
 	
-	
-	public int getVh_id() {
-		return vh_id;
+	public int getStatus() {
+		return status;
 	}
-	public void setVh_id(int vh_id) {
-		this.vh_id = vh_id;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	public String getAdded_date() {
 		return added_date;
@@ -41,5 +46,32 @@ public class InputView_History {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+	public static class UpdateComment{
+		@JsonProperty("DOC_ID")
+		private int  doc_id;
+		@JsonProperty("DESCRIPTION")
+		private String description;
+		@JsonProperty("STATUS")
+		private int status;
+		public int getDoc_id() {
+			return doc_id;
+		}
+		public void setDoc_id(int doc_id) {
+			this.doc_id = doc_id;
+		}
+		public String getDescription() {
+			return description;
+		}
+		public void setDescription(String description) {
+			this.description = description;
+		}
+		public int getStatus() {
+			return status;
+		}
+		public void setStatus(int status) {
+			this.status = status;
+		}
+		
+	}
+
 }

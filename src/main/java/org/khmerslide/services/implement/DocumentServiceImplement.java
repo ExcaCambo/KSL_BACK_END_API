@@ -31,5 +31,9 @@ public class DocumentServiceImplement implements DocumentService {
 	public boolean deleteDocument(int doc_id) {
 		return documentRepository.deleteDocument(doc_id);
 	}
+	@Override
+	public ArrayList<Document> getDocumentById(int doc_id) {
+		return documentRepository.getDocumentById(doc_id);
+	}
 
 }

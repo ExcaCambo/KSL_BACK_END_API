@@ -55,4 +55,17 @@ public class InputComment {
 		this.description = description;
 	}
 	
+	public static class UpdateComment{
+		@JsonProperty("CMT_TEXT")
+		private String cmt_text;
+
+		public String getCmt_text() {
+			return cmt_text;
+		}
+
+		public void setCmt_text(String cmt_text) {
+			this.cmt_text = cmt_text;
+		}
+		
+	}
 }

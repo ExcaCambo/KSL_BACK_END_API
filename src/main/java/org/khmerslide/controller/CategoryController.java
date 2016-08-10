@@ -47,6 +47,27 @@ public class CategoryController {
 		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value={"/get-category-by-id/{cat_id}"},method=RequestMethod.GET,headers="Accept=Application/json")
+	public ResponseEntity<Map<String, Object>> getCategoryById(@PathVariable("cat_id") int cat_id){
+		Map<String , Object> map = new HashMap<String , Object>();
+		try{
+			ArrayList<Category> cateogry = categoryService.getCategoryById(cat_id);
+			if(!cateogry.isEmpty()){
+				map.put("DATA", cateogry);
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA FOUND!");
+			}else{
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA NOT FOUND!");
+			}
+		}catch(Exception e){
+			map.put("STATUS", false);
+			map.put("MESSAGE", "ERROR!");
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
+	}
 	
 	@RequestMapping(value={"/add-category"},method = RequestMethod.POST, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> addCategory(@RequestBody InputCategory.InsertCategory inputcategory){

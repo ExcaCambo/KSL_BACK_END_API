@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.khmerslide.entities.Document;
+import org.khmerslide.entities.User;
 import org.khmerslide.entities.View_History;
 import org.khmerslide.model.InputView_History;
+import org.khmerslide.model.InputView_History.UpdateComment;
 import org.khmerslide.services.ViewHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,17 +48,43 @@ public class ViewHistoryController {
 		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value={"/get-viewhistory/{vh_id}"},method=RequestMethod.GET,headers="Accept=Application/json")
+	public ResponseEntity<Map<String, Object>> getViewHistoryById(@PathVariable("vh_id") int vh_id){
+		Map<String , Object> map = new HashMap<String , Object>();
+		try{
+			ArrayList<View_History> vh = viewhistoryService.getViewHistoryById(vh_id);
+			if(!vh.isEmpty()){
+				map.put("DATA", vh);
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA FOUND!");
+			}else{
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA NOT FOUND!");
+			}
+		}catch(Exception e){
+			map.put("STATUS", false);
+			map.put("MESSAGE", "ERROR!");
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
+	}
+	
 	@RequestMapping(value={"/add-viewhistory"},method = RequestMethod.POST, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> addViewHistory(@RequestBody InputView_History viewhistory){
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
 			View_History vh = new View_History();
-			vh.setVh_id(viewhistory.getVh_id());
+	
 			vh.setAdded_date(viewhistory.getAdded_date());
-			vh.setUser_id(viewhistory.getUser_id());
-			vh.setDoc_id(viewhistory.getDoc_id());
+				User U = new User();
+					U.setUser_id(U.getUser_id());
+			vh.setUser(U);
+				Document D = new Document();
+					D.setDoc_id(D.getDoc_id());
+			vh.setDoc(D);
 			vh.setDescription(viewhistory.getDescription());
-			
+			vh.setStatus(viewhistory.getStatus());
 			if(viewhistoryService.addViewHistory(vh)){
 				map.put("MESSAGE", "ADD VIEW HISTORY");
 				map.put("STATUS", true);
@@ -72,11 +101,22 @@ public class ViewHistoryController {
 		
 	}
 	
-	@RequestMapping(value={"/update-viewhistory"},method=RequestMethod.PUT, headers = "Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> updateViewHisotry(@RequestBody View_History vh){
+	@RequestMapping(value={"/update-viewhistory/{vh_id}"},method=RequestMethod.PUT, headers = "Accept=Application/json")
+	public ResponseEntity<Map<String, Object>> updateViewHisotry(@PathVariable("vh_id") int vh_id,@RequestBody UpdateComment viewhistory){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
-			if(viewhistoryService.updateViewHistory(vh)){
+			View_History  VH = new View_History();
+				VH.setVh_id(vh_id);
+					User U = new User();
+						U.setUser_id(U.getUser_id());
+				VH.setUser(U);
+					Document D = new Document();
+						D.setDoc_id(D.getDoc_id());
+				VH.setDoc(D);
+				VH.setDescription(viewhistory.getDescription());
+				VH.setStatus(viewhistory.getStatus());
+			
+			if(viewhistoryService.updateViewHistory(VH)){
 				map.put("MESSAGE", "UPDATE VIEW HISTORY");
 				map.put("STATUS", true);
 			}else{

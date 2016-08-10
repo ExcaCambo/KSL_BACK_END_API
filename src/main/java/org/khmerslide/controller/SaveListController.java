@@ -28,10 +28,32 @@ public class SaveListController {
 	
 	@ResponseBody
 	@RequestMapping(value={"/get-getsavelist"},method=RequestMethod.GET,headers="Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> getSaveList(){
+	public ResponseEntity<Map<String, Object>> getSaveListById(){
 		Map<String , Object> map = new HashMap<String , Object>();
 		try{
 			ArrayList<Save_List> savelist = savelistService.getSaveList();
+			if(!savelist.isEmpty()){
+				map.put("DATA", savelist);
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA FOUND!");
+			}else{
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA NOT FOUND!");
+			}
+		}catch(Exception e){
+			map.put("STATUS", false);
+			map.put("MESSAGE", "ERROR!");
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value={"/get-getsavelist/{sl_id}"},method=RequestMethod.GET,headers="Accept=Application/json")
+	public ResponseEntity<Map<String, Object>> getSaveListById(@PathVariable("sl_id") int sl_id){
+		Map<String , Object> map = new HashMap<String , Object>();
+		try{
+			ArrayList<Save_List> savelist = savelistService.getSaveListById(sl_id);
 			if(!savelist.isEmpty()){
 				map.put("DATA", savelist);
 				map.put("STATUS", true);

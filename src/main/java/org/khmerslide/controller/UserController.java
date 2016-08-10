@@ -46,7 +46,28 @@ public class UserController {
 		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value="/get-user-by-id/{user_id}",method=RequestMethod.GET, headers="Accept=Application/json")
+	public ResponseEntity<Map<String, Object>> getUserById(@PathVariable("user_id") int user_id){
+		Map<String , Object> map = new HashMap<String , Object>();
+		try{
+			ArrayList<User> user = userService.getUserById(user_id);
+			
+			if(!user.isEmpty()){
+				map.put("DATA", user);
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA FOUND!");
+			}else{
+				map.put("STATUS", false);
+				map.put("MESSAGE", "DATA NOT FOUND!");
+			}
+		}catch(Exception e){
+			map.put("STATUS", false);
+			map.put("MESSAGE", "ERROR!");
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
+	}
 	
 	
 	
@@ -82,28 +103,6 @@ public class UserController {
 		return new ResponseEntity<Map<String,Object>>(map , HttpStatus.OK);
 		
 	}
-	
-	
-	/*@RequestMapping(value="/{status}" ,method = RequestMethod.POST, headers="Accept=Application/json")
-	public ResponseEntity<Map<String , Object>> setApproveByAdmin(@PathVariable("status") int status){
-		Map<String,Object> map = new HashMap<String, Object>();
-		try{
-			if(userService.setApproveByAdmin(status)){
-				map.put("MESSAGE", "USER HAVE BEEN APPROVE");
-				map.put("STATUS", true);
-			}else{
-				map.put("MESSAGE", "NOT ADD USER");
-				map.put("STATUS", false);
-			}
-		}catch(Exception e){
-			map.put("MESSAGE", "Error!");
-			map.put("STATUS", false);
-			e.printStackTrace();
-		}
-		return new ResponseEntity<Map<String,Object>>(map , HttpStatus.OK);
-		
-	}
-	*/
 	
 	@RequestMapping(value={"/update-user/{user_id}"},method=RequestMethod.PUT, headers = "Accept=Application/json")
 	public ResponseEntity<Map<String, Object>> updateUser(@PathVariable("user_id") int user_id,@RequestBody InputUser.UpdateUser updateuser){

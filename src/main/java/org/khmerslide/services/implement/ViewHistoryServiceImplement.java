@@ -32,4 +32,9 @@ public class ViewHistoryServiceImplement implements ViewHistoryService {
 		return viewhistoryRepository.deleteViewHistory(vh_id);
 	}
 
+	@Override
+	public ArrayList<View_History> getViewHistoryById(int vh_id) {
+		return viewhistoryRepository.getViewHistoryById(vh_id);
+	}
+
 }

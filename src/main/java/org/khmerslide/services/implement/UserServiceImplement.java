@@ -18,7 +18,6 @@ public class UserServiceImplement implements UserService{
 	}
 	@Override
 	public boolean addUser(User user) {
-		user.setStatus(2);
 		return userRepository.addUser(user);
 	}
 	@Override
@@ -30,8 +29,8 @@ public class UserServiceImplement implements UserService{
 		return userRepository.deleteUser(id);
 	}
 	@Override
-	public boolean setApproveByAdmin(int status) {
-		return userRepository.setApproveByAdmin(status);
+	public ArrayList<User> getUserById(int id) {
+		return userRepository.getUserById(id);
 	}
 
 }

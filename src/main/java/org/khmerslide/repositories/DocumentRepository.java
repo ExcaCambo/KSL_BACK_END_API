@@ -48,6 +48,39 @@ public interface DocumentRepository {
 	})
 	public ArrayList<Document> getDocument();
 	
+	
+	String G_DOCBI="SELECT" 
+			+" d.doc_id,"
+			+" d.doc_title,"
+			+" d.uploaded_date,"
+			+" d.url,"
+			+" d.liked,"
+			+" d.shared,"
+			+" d.viewed,"
+			+" d.description,"
+			+" d.status,"
+			+" dt.doc_name,"
+			+" u.user_name,"
+			+" ct.cat_name,"
+			+" d.thumbnail,"
+			+" d.source" 
+			+" FROM" 
+			+" ksl_document d"
+			+" FULL JOIN ksl_doc_type dt ON d.doc_type_id = dt.doc_type_id"  
+			+" FULL JOIN ksl_category ct ON d.cat_id = ct.cat_id"
+			+" FULL JOIN ksl_user u ON d.user_id = u.user_id"
+			+" WHERE"
+			+" d.status = 1 "
+			+ "AND"
+			+ "d.doc_id=#{id}";
+	@Select(G_DOCBI)
+	@Results(value={
+			@Result(property="doc.doc_name",column="doc_name"),
+			@Result(property="user.user_name",column="user_name"),
+			@Result(property="cat.cat_name",column="cat_name")
+	})
+	public ArrayList<Document> getDocumentById(int doc_id);
+	
 	String A_DOC="INSERT INTO"
 				+" ksl_document("
 				+" doc_title,"

@@ -10,6 +10,7 @@ import org.khmerslide.entities.Document;
 import org.khmerslide.entities.User;
 import org.khmerslide.model.InputCategory;
 import org.khmerslide.model.InputComment;
+import org.khmerslide.model.InputComment.UpdateComment;
 import org.khmerslide.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,6 +49,29 @@ public class CommentController {
 		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value={"/get-comment/{cmt_id}"},method=RequestMethod.GET,headers="Accept=Application/json")
+	public ResponseEntity<Map<String, Object>> getCommentById(@PathVariable("cmt_id") int cmt_id){
+		Map<String , Object> map = new HashMap<String , Object>();
+		try{
+			ArrayList<Comment> comment = commentService.getCommentById(cmt_id);
+			if(!comment.isEmpty()){
+				map.put("DATA", comment);
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA FOUND!");
+			}else{
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA NOT FOUND!");
+			}
+		}catch(Exception e){
+			map.put("STATUS", false);
+			map.put("MESSAGE", "ERROR!");
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
+	}
+	
+	
 	
 	@RequestMapping(value={"/add-comment"},method = RequestMethod.POST, headers="Accept=Application/json")
 	public @ResponseBody ResponseEntity<Map<String , Object>> addComment(@RequestBody InputComment insertcomment){
@@ -81,7 +105,7 @@ public class CommentController {
 	}
 	
 	@RequestMapping(value={"/update-comment/{cmt_id}"},method=RequestMethod.PUT, headers = "Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> updateComment(@PathVariable("cmt_id") int cmt_id ,@RequestBody InputComment updatecomment){
+	public ResponseEntity<Map<String, Object>> updateComment(@PathVariable("cmt_id") int cmt_id ,@RequestBody UpdateComment updatecomment){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
 				Comment C = new Comment();

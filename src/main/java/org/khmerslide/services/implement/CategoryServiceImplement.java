@@ -33,4 +33,9 @@ public class CategoryServiceImplement implements CategoryService{
 		return categoryRepository.deleteCategory(cat_id);
 	}
 
+	@Override
+	public ArrayList<Category> getCategoryById(int cate_id) {
+		return categoryRepository.getCategoryById(cate_id);
+	}
+
 }

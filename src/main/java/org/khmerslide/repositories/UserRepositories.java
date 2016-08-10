@@ -41,9 +41,31 @@ public interface UserRepositories {
 	})
 	public ArrayList<User> getUser();
 
+	
+		String G_BID="SELECT"
+				+" U.user_id,"
+				+" U.user_name,"
+				+" U.gender,"
+				+" U.email,"
+				+" U.password,"
+				+" U.registered_date,"
+				+" U.photo,"
+				+" U.description,"
+				+" U.status,"
+				+" ut.role_name"
+				+" FROM"
+				+" ksl_user U"
+				+" FULL JOIN ksl_user_type ut ON U.role_id = ut.role_id"
+				+" WHERE"
+				+" user_id=#{id}";
+	@Select(G_BID)
+	@Results(value={
+			@Result(property="role.role_name", column="role_name")
+	})
+	public ArrayList<User> getUserById(int id);
+
 	String A_USER="INSERT INTO"
 					+" ksl_user("
-					+" user_id,"
 					+" user_name,"
 					+" gender,"
 					+" email,"
@@ -54,7 +76,6 @@ public interface UserRepositories {
 					+" status,"
 					+" role_id) "
 					+" VALUES("
-					+" #{user_id},"
 					+" #{user_name},"
 					+" #{gender},"
 					+" #{email},"
@@ -63,22 +84,9 @@ public interface UserRepositories {
 					+" #{photo},"
 					+" #{description},"
 					+" #{status},"
-					+" #{role.role_id})"; 
+					+" #{role.role_id})";
 	@Insert(A_USER)
 	public boolean addUser(User user);
-	
-	
-	
-	
-	String UABA="UPDATE ksl_user "
-			+ " SET"
-			+ " status=#{status}"
-			+ " WHERE stutus = 2 "
-			+ " AND"
-			+ " user_id =#{user_id}";
-	@Update(UABA)
-	public boolean setApproveByAdmin(int status);
-	
 	
 	String U_USER="UPDATE ksl_user "
 					+ "SET "

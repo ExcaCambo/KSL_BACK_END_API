@@ -35,6 +35,30 @@ public interface SaveListRepository {
 			@Result(property="doc.doc_name",column="doc_name")
 	})
 	public ArrayList<Save_List> getSaveList();
+	
+	
+	String G_SLBI="SELECT"
+			+" S.sl_id,"
+			+" S.sl_name,"
+			+" S.saved_date,"
+			+" S.status,"
+			+" U.user_name,"
+			+" D.doc_title,"
+			+" S.description"
+			+" FROM"
+			+" ksl_save_list S"
+			+" INNER JOIN ksl_user U ON  S.user_id = U.user_id"
+			+" INNER JOIN ksl_document D ON S.doc_id = D.doc_id"
+			+" WHERE S.status = 1"
+			+ "AND"
+			+ "S.sl_id=#{id}";
+	@Select(G_SLBI)
+	@Results(value={
+			@Result(property="user.user_name",column="user_name"),
+			@Result(property="doc.doc_name",column="doc_name")
+	})
+	public ArrayList<Save_List> getSaveListById(int id);
+	
 	String A_SL="INSERT INTO "
 				+ "ksl_save_list("
 				+ "sl_id,"

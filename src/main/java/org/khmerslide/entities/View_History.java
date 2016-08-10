@@ -8,12 +8,20 @@ public class View_History {
 	@JsonProperty("ADDED_DATE")
 	private String added_date;
 	@JsonProperty("USER_ID")
-	private int  user_id;
+	private User  user;
 	@JsonProperty("DOC_ID")
-	private int  doc_id;
+	private Document  doc;
 	@JsonProperty("DESCRIPTION")
 	private String description;
+	@JsonProperty("STATUS")
+	private int status;
 	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public int getVh_id() {
 		return vh_id;
 	}
@@ -26,23 +34,23 @@ public class View_History {
 	public void setAdded_date(String added_date) {
 		this.added_date = added_date;
 	}
-	public int getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
-	public int getDoc_id() {
-		return doc_id;
-	}
-	public void setDoc_id(int doc_id) {
-		this.doc_id = doc_id;
-	}
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Document getDoc() {
+		return doc;
+	}
+	public void setDoc(Document doc) {
+		this.doc = doc;
 	}
 	
 }

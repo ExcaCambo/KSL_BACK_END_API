@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class InputCategory {
 	//Ido
 /*	private int cat_id;*/
+	
 	@JsonProperty("PARENT")
 	private int parent_id;
 	@JsonProperty("CAT_NAME")
@@ -60,6 +61,7 @@ public class InputCategory {
 	}
 	
 	public static class InsertCategory extends InputCategory{
+		@JsonProperty("CREATED_DATE")
 		private String created_date;
 		public String getCreated_date() {
 			return created_date;

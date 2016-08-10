@@ -48,6 +48,27 @@ public class DocumentController {
 		}
 		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
 	}
+	@ResponseBody
+	@RequestMapping(value={"/get-document/{doc_id}"},method=RequestMethod.GET,headers="Accept=Application/json")
+	public ResponseEntity<Map<String, Object>> getDocumentById(@PathVariable("doc_id") int doc_id){
+		Map<String , Object> map = new HashMap<String , Object>();
+		try{
+			ArrayList<Document> docs = documentService.getDocumentById(doc_id);
+			if(!docs.isEmpty()){
+				map.put("DATA", docs);
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA FOUND!");
+			}else{
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA NOT FOUND!");
+			}
+		}catch(Exception e){
+			map.put("STATUS", false);
+			map.put("MESSAGE", "ERROR!");
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
+	}
 	
 	@RequestMapping(value={"/add-ducument"},method = RequestMethod.POST, headers="Accept=Application/json")
 	public ResponseEntity<Map<String , Object>> addDocument(@RequestBody InputDocument.insertDocument document){

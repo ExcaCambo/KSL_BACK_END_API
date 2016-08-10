@@ -37,21 +37,44 @@ public interface CommentRepository {
 			@Result(property="doc.doc_title",column="doc_title")
 	})
 	public ArrayList<Comment> getComment();
+	
+	
+	String G_CMBI="SELECT" 
+			+" C.cmt_id,"
+			+" C.cmt_text,"
+			+" C.cmt_date,"
+			+" C.status,"
+			+" U.user_name,"
+			+" D.doc_title" 
+			+" FROM" 
+			+" ksl_comment C"
+			+" FULL JOIN ksl_user U ON C.user_id = U.user_id"
+			+" FULL JOIN ksl_document D ON C.doc_id = D.doc_id"
+			+" WHERE C.status = 1"
+			+" AND"
+			+" C.cmt_id=#{id};";
+	@Select(G_CMBI)
+	@Results(value={
+			@Result(property="user.user_name",column="user_name"),
+			@Result(property="doc.doc_title",column="doc_title")
+	})
+	public ArrayList<Comment> getCommentById(int id);
+	
 	String A_CM="INSERT INTO "
 			+ "ksl_comment("
-			+ "cmt_id,"
 			+ "cmt_text,"
 			+ "cmt_date,"
 			+ "status,"
 			+ "user_id,"
-			+ "doc_id) "
+			+ "doc_id,"
+			+ "description)"
 			+ "VALUES("
-			+ "#{cmt_id},"
 			+ "#{cmt_text},"
 			+ "#{cmt_date},"
 			+ "#{status},"
 			+ "#{user.user_id},"
-			+ "#{doc.doc_id})";
+			+ "#{doc.doc_id},"
+			+ "#{description})";
 	@Insert(A_CM)
 	@Results(value={
 			@Result(property="user.user_id",column="user_id"),
@@ -59,14 +82,10 @@ public interface CommentRepository {
 	})
 	public boolean addComment(Comment comment);
 	
-	String U_CM="UPDATE ksl_comment SET "
-			+ "cmt_text=#{cmt_text},"
-			+ "cmt_date=#{cmt_date},"
-			+ "status=#{status},"
-			+ "user_id=#{user.user_id},"
-			+ "doc_id=#{doc.doc_id} "
-			+ "WHERE "
-			+ "cmt_id=#{cmt_id}";
+	String U_CM="UPDATE ksl_comment SET"
+			+" cmt_text=#{cmt_text}"
+			+" WHERE"
+			+" cmt_id=#{cmt_id}";
 	@Update(U_CM)
 	public boolean updateComment(Comment comment);
 	

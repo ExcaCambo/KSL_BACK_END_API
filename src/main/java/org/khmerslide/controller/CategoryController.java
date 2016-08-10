@@ -84,7 +84,7 @@ public class CategoryController {
 			cat.setCat_name(inputcategory.getCat_name());
 			cat.setCreated_date(inputcategory.getCreated_date());
 			cat.setStatus(inputcategory.getStatus());
-			cat.setStatus(inputcategory.getStatus());
+			/*cat.setStatus(inputcategory.getStatus());*/
 			
 			User u = new User();
 			u.setUser_id(inputcategory.getUser_id());

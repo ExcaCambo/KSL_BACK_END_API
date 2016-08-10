@@ -85,7 +85,7 @@ public class UserController {
 			u.setDescription(user.getDescription());
 			u.setStatus(user.getStatus());
 			User_Type  ut = new User_Type();
-					ut.setRole_id(ut.getRole_id());
+					ut.setRole_id(user.getRole());
 			u.setRole(ut);
 			
 			if(userService.addUser(u)){
@@ -117,7 +117,7 @@ public class UserController {
 			U.setPhoto(updateuser.getPhoto());
 			U.setDescription(updateuser.getDescription());
 				User_Type  ut =new User_Type();
-					ut.setRole_id(ut.getRole_id());
+					ut.setRole_id(updateuser.getRole());
 			U.setRole(ut);
 			if(userService.updateUser(U)){
 				map.put("MESSAGE", "USER UPDATE");

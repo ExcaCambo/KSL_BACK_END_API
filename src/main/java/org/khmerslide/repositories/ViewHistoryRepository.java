@@ -48,7 +48,7 @@ public interface ViewHistoryRepository {
 			+" INNER JOIN ksl_user U ON VH.user_id = U.user_id"
 			+" INNER JOIN ksl_document D ON VH.doc_id = D.doc_id"
 			+" WHERE"
-			+ "VH.vh_id=#{id}";
+			+" VH.vh_id=#{id}";
 	@Select(G_VHBI)
 	@Results(value={
 			@Result(property="user.user_name",column="user_name"),

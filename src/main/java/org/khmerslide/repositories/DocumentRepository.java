@@ -70,9 +70,11 @@ public interface DocumentRepository {
 			+" FULL JOIN ksl_category ct ON d.cat_id = ct.cat_id"
 			+" FULL JOIN ksl_user u ON d.user_id = u.user_id"
 			+" WHERE"
-			+" d.status = 1 "
-			+ "AND"
-			+ "d.doc_id=#{id}";
+			+" d.status = 1"
+			+" AND"
+			+" d.doc_id=#{id};";
+	
+
 	@Select(G_DOCBI)
 	@Results(value={
 			@Result(property="doc.doc_name",column="doc_name"),
@@ -119,7 +121,7 @@ public interface DocumentRepository {
 	})
 	public boolean addDocument(Document doc);
 	
-	String U_DOC="UPDATE ksl_document "
+	String U_DOC="UPDATE ksl_document"
 			+" SET"
 			+" doc_title=#{doc_title},"
 			+" uploaded_date=#{uploaded_date},"
@@ -137,6 +139,11 @@ public interface DocumentRepository {
 			+" WHERE"
 			+" doc_id=#{doc_id}";
 	@Update(U_DOC)
+	@Results(value={
+			@Result(property="doc.doc_type_id", column="doc_type_id"),
+			@Result(property="user.user_id", column="user_id"),
+			@Result(property="cat.cat_id",column="cat_id")
+	})
 	public boolean updateDocument(Document doc);
 	
 	String D_DOC="UPDATE ksl_document"

@@ -9,7 +9,7 @@ import org.khmerslide.entities.Document;
 import org.khmerslide.entities.User;
 import org.khmerslide.entities.View_History;
 import org.khmerslide.model.InputView_History;
-import org.khmerslide.model.InputView_History.UpdateComment;
+import org.khmerslide.model.InputView_History.UpdateViewHistory;
 import org.khmerslide.services.ViewHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -78,10 +78,10 @@ public class ViewHistoryController {
 	
 			vh.setAdded_date(viewhistory.getAdded_date());
 				User U = new User();
-					U.setUser_id(U.getUser_id());
+					U.setUser_id(viewhistory.getUser_id());
 			vh.setUser(U);
 				Document D = new Document();
-					D.setDoc_id(D.getDoc_id());
+					D.setDoc_id(viewhistory.getDoc_id());
 			vh.setDoc(D);
 			vh.setDescription(viewhistory.getDescription());
 			vh.setStatus(viewhistory.getStatus());
@@ -102,16 +102,13 @@ public class ViewHistoryController {
 	}
 	
 	@RequestMapping(value={"/update-viewhistory/{vh_id}"},method=RequestMethod.PUT, headers = "Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> updateViewHisotry(@PathVariable("vh_id") int vh_id,@RequestBody UpdateComment viewhistory){
+	public ResponseEntity<Map<String, Object>> updateViewHisotry(@PathVariable("vh_id") int vh_id,@RequestBody UpdateViewHistory viewhistory){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
 			View_History  VH = new View_History();
 				VH.setVh_id(vh_id);
-					User U = new User();
-						U.setUser_id(U.getUser_id());
-				VH.setUser(U);
 					Document D = new Document();
-						D.setDoc_id(D.getDoc_id());
+						D.setDoc_id(viewhistory.getDoc_id());
 				VH.setDoc(D);
 				VH.setDescription(viewhistory.getDescription());
 				VH.setStatus(viewhistory.getStatus());

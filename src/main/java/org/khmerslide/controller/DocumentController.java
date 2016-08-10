@@ -83,15 +83,14 @@ public class DocumentController {
 			doc.setViewed(document.getViewed());
 			doc.setDescription(document.getDescription());
 			doc.setStatus(document.getStatus());
-			Doc_Type dt = new Doc_Type();
-				dt.setDoc_type(document.getDoc_type_id());
+				Doc_Type  dt = new Doc_Type();
+					dt.setDoc_type(document.getDoc_type_id());
 			doc.setDoc(dt);
-			User u = new User();
-				u.setUser_id(document.getUser_id());
+				User u = new User();
+					u.setUser_id(document.getUser_id());
 			doc.setUser(u);
-			Category  c = new Category();
-				c.setCat_id(document.getCat_id());
-			doc.setCat(c);
+				Category c = new Category();
+					c.setCat_id(document.getCat_id());
 			doc.setThumbnail(document.getThumbnail());
 			doc.setSource(document.getSource());
 			
@@ -120,13 +119,13 @@ public class DocumentController {
 			doc.setDoc_title(document.getDoc_title());
 			doc.setStatus(document.getStatus());
 				Doc_Type dt = new Doc_Type();
-				dt.setDoc_type(dt.getDoc_type());
+				dt.setDoc_type(document.getDoc_type_id());
 			doc.setDoc(dt);
 				User  u = new User();
 					u.setUser_id(document.getUser_id());
 			doc.setUser(u);
 				Category c = new Category();
-					c.setCat_id(c.getCat_id());
+					c.setCat_id(document.getCat_id());
 			doc.setCat(c);
 			doc.setThumbnail(document.getThumbnail());
 			doc.setSource(document.getSource());

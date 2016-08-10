@@ -5,12 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.khmerslide.entities.Category;
+import org.khmerslide.entities.Comment.updateComment;
 import org.khmerslide.entities.Comment;
 import org.khmerslide.entities.Document;
 import org.khmerslide.entities.User;
-import org.khmerslide.model.InputCategory;
 import org.khmerslide.model.InputComment;
 import org.khmerslide.model.InputComment.UpdateComment;
+import org.khmerslide.model.InputCategory;
 import org.khmerslide.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -82,10 +83,10 @@ public class CommentController {
 			com.setCmt_date(insertcomment.getCmt_date());
 			com.setStatus(insertcomment.getStatus());
 			 	User  u = new User();
-			 		u.setUser_id(u.getUser_id());
+			 		u.setUser_id(insertcomment.getUser());
 			com.setUser(u);
 				Document d = new Document();
-				d.setDoc_id(d.getDoc_id());
+				d.setDoc_id(insertcomment.getDoc());
 			com.setDoc(d);
 			com.setDescription(insertcomment.getDescription());
 			if(commentService.addComment(com)){

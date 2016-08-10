@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.khmerslide.entities.Document;
 import org.khmerslide.entities.Save_List;
+import org.khmerslide.model.InputSave_List.updateSaveList;
 import org.khmerslide.entities.User;
 import org.khmerslide.model.InputDocument;
 import org.khmerslide.model.InputSave_List;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
 
 @Controller
 @RequestMapping(value="/api/savelist")
@@ -79,11 +82,11 @@ public class SaveListController {
 			sl.setSaved_date(savelist.getSaved_date());
 			sl.setStatus(savelist.getStatus());
 				User u = new User();
-					u.setUser_id(u.getUser_id());
+					u.setUser_id(savelist.getUser_id());
 			sl.setUser(u);
 				Document  d = new Document();
-					d.setDoc_id(d.getDoc_id());
-			sl.setDoc(d);
+					d.setDoc_id(savelist.getDoc_id());
+				sl.setDoc(d);
 			sl.setDescription(savelist.getDescription());
 			
 			if(savelistService.addSaveList(sl)){
@@ -103,17 +106,17 @@ public class SaveListController {
 	}
 	
 	@RequestMapping(value={"/update-savelist/{sl_id}"},method=RequestMethod.PUT, headers = "Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> updateSaveList(@PathVariable("sl_id") int sl_id,@RequestBody InputSave_List inputsl){
+	public ResponseEntity<Map<String, Object>> updateSaveList(@PathVariable("sl_id") int sl_id,@RequestBody updateSaveList updatesl){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
 			Save_List sl = new Save_List();
 				sl.setSl_id(sl_id);
-				sl.setSl_name(inputsl.getSl_name());
-				sl.setStatus(inputsl.getStatus());
+				sl.setSl_name(updatesl.getSl_name());
+				sl.setStatus(updatesl.getStatus());
 					Document  d = new Document();
-						d.setDoc_id(d.getDoc_id());
+						d.setDoc_id(updatesl.getDoc_id());
 				sl.setDoc(d);
-				sl.setDescription(inputsl.getDescription());
+				sl.setDescription(updatesl.getDescription());
 			if(savelistService.updateSaveList(sl)){
 				map.put("MESSAGE", "UPDATE SAVELIST");
 				map.put("STATUS", true);

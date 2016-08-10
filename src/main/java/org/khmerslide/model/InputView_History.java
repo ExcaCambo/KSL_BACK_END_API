@@ -46,7 +46,7 @@ public class InputView_History {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public static class UpdateComment{
+	public static class UpdateViewHistory{
 		@JsonProperty("DOC_ID")
 		private int  doc_id;
 		@JsonProperty("DESCRIPTION")

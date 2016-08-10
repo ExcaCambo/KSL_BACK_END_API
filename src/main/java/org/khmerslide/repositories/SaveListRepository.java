@@ -28,7 +28,8 @@ public interface SaveListRepository {
 			+" ksl_save_list S"
 			+" INNER JOIN ksl_user U ON  S.user_id = U.user_id"
 			+" INNER JOIN ksl_document D ON S.doc_id = D.doc_id"
-			+" WHERE S.status = 1";
+			+" WHERE"
+			+" S.status = 1";
 	@Select(G_SL)
 	@Results(value={
 			@Result(property="user.user_name",column="user_name"),
@@ -49,9 +50,10 @@ public interface SaveListRepository {
 			+" ksl_save_list S"
 			+" INNER JOIN ksl_user U ON  S.user_id = U.user_id"
 			+" INNER JOIN ksl_document D ON S.doc_id = D.doc_id"
-			+" WHERE S.status = 1"
-			+ "AND"
-			+ "S.sl_id=#{id}";
+			+" WHERE "
+			+" S.status = 1"
+			+" AND"
+			+" S.sl_id=#{id}";
 	@Select(G_SLBI)
 	@Results(value={
 			@Result(property="user.user_name",column="user_name"),
@@ -59,23 +61,21 @@ public interface SaveListRepository {
 	})
 	public ArrayList<Save_List> getSaveListById(int id);
 	
-	String A_SL="INSERT INTO "
-				+ "ksl_save_list("
-				+ "sl_id,"
-				+ "sl_name,"
-				+ "saved_date,"
-				+ "status,"
-				+ "user_id,"
-				+ "doc_id,"
-				+ "description) "
-				+ "VALUES("
-				+ "#{sl_id},"
-				+ "#{sl_name},"
-				+ "#{saved_date},"
-				+ "#{status},"
-				+ "#{user.user_id},"
-				+ "#{doc.doc_id},"
-				+ "#{description})";
+	String A_SL="INSERT INTO"
+				+" ksl_save_list("
+				+" sl_name,"
+				+" saved_date,"
+				+" status,"
+				+" user_id,"
+				+" doc_id,"
+				+" description)"
+				+" VALUES("
+				+" #{sl_name},"
+				+" #{saved_date},"
+				+" #{status},"
+				+" #{user.user_id},"
+				+" #{doc.doc_id},"
+				+" #{description})";
 	@Insert(A_SL)
 	@Results(value={
 			@Result(property="user.user_id",column="user_id"),
@@ -91,6 +91,10 @@ public interface SaveListRepository {
 			+ "WHERE "
 			+ "sl_id=#{sl_id}";
 	@Update(U_SL)
+	@Results(value={
+			@Result(property="user.user_id",column="user_id"),
+			@Result(property="doc.doc_id",column="doc_id")
+	})
 	public boolean updateSaveList(Save_List savelist);
 	String D_SL="UPDATE ksl_save_list"
 			+" SET"
@@ -100,5 +104,5 @@ public interface SaveListRepository {
 	@Delete(D_SL)
 	public boolean deleteSaveList(int savelist);
 	
-
+	
 }

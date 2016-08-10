@@ -82,7 +82,8 @@ public interface CommentRepository {
 	})
 	public boolean addComment(Comment comment);
 	
-	String U_CM="UPDATE ksl_comment SET"
+	String U_CM="UPDATE ksl_comment"
+			+" SET"
 			+" cmt_text=#{cmt_text}"
 			+" WHERE"
 			+" cmt_id=#{cmt_id}";

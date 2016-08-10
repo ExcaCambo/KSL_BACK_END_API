@@ -34,7 +34,8 @@ public interface UserRepositories {
 				+" FROM "
 				+" ksl_user U"
 				+" INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id"
-				+" WHERE U.status=1";
+				+" WHERE"
+				+" U.status=1";
 	@Select(G_USER)
 	@Results(value={
 			@Result(property="role.role_name", column="role_name")

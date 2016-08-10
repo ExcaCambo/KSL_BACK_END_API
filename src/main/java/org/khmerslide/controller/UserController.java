@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.khmerslide.entities.User;
 import org.khmerslide.entities.User_Type;
+import org.khmerslide.model.FormUserInput;
 import org.khmerslide.model.InputUser;
 import org.khmerslide.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,22 +53,20 @@ public class UserController {
 	
 	
 	@RequestMapping(value={"/add-user"},method = RequestMethod.POST, headers="Accept=Application/json")
-	public ResponseEntity<Map<String , Object>> addUser(@RequestBody InputUser user){
+	public ResponseEntity<Map<String , Object>> addUser(@RequestBody FormUserInput inputUser){
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
 			User u = new User();
-			u.setUser_id(user.getUser_id());
-			u.setUser_name(user.getUser_name());
-			u.setGender(user.getGender());
-			u.setEmail(user.getEmail());
-			u.setPassword(user.getPassword());
-			u.setRegistered_date(user.getRegistered_date());
-			u.setPhoto(user.getPhoto());
-			u.setDescription(user.getDescription());
-			u.setStatus(user.getStatus());
-			//u.setRole_id(user.getRole_id());
+			u.setUser_name(inputUser.getUser_name());
+			u.setGender(inputUser.getGender());
+			u.setEmail(inputUser.getEmail());
+			u.setPassword(inputUser.getPassword());
+			u.setPhoto(inputUser.getPhoto());
+			u.setRegistered_date(inputUser.getRegistered_date());
+		
+			u.setStatus(inputUser.getStatus());			
 			User_Type  ut = new User_Type();
-					ut.setRole_id(user.getUser_id());
+					ut.setRole_id(inputUser.getRole_id());
 			u.setRole(ut);
 			
 			if(userService.addUser(u)){

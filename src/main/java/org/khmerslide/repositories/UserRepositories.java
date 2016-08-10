@@ -43,27 +43,23 @@ public interface UserRepositories {
 
 	String A_USER="INSERT INTO "
 					+ "ksl_user("
-					+ "user_id,"
 					+ "user_name,"
 					+ "gender,"
 					+ "email,"
 					+ "password,"
-					+ "registered_date,"
 					+ "photo,"
-					+ "description,"
+					+ "registered_date,"
 					+ "status,"
 					+ "role_id) "
 					+ "VALUES("
-					+ "#{user_id},"
 					+ "#{user_name},"
 					+ "#{gender},"
 					+ "#{email},"
 					+ "#{password},"
-					+ "#{registered_date},"
 					+ "#{photo},"
-					+ "#{description},"
+					+ "#{registered_date},"
 					+ "#{status},"
-					+ "#{role_id.role_id})"; 
+					+ "#{role.role_id})"; 
 	@Insert(A_USER)
 	public boolean addUser(User user);
 	

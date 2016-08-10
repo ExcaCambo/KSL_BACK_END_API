@@ -18,7 +18,7 @@ public class UserServiceImplement implements UserService{
 	}
 	@Override
 	public boolean addUser(User user) {
-		user.setStatus(2);
+		
 		return userRepository.addUser(user);
 	}
 	@Override

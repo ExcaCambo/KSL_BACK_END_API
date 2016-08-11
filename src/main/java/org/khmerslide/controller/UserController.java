@@ -7,7 +7,9 @@ import java.util.Map;
 import org.khmerslide.entities.User;
 import org.khmerslide.entities.User_Type;
 import org.khmerslide.model.FormUserInput;
-import org.khmerslide.model.InputUser;
+
+import org.khmerslide.model.FormUserUpdate;
+import org.khmerslide.model.FormUserUpdateStatus;
 import org.khmerslide.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,6 +50,30 @@ public class UserController {
 		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/get-user/{id}" , method = RequestMethod.GET, headers="Accept=Application/json")
+	public ResponseEntity<Map<String , Object>> getUserById(@PathVariable("id") int id){
+		Map<String , Object> map = new HashMap<String,Object>();
+		try{
+			ArrayList<User> users = userService.getUserById(id);
+			if(!users.isEmpty()){
+				map.put("DATA", users);
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA FOUND!");
+			}else{
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA NOT FOUND!");
+			}
+		}catch(Exception e){
+			map.put("STATUS", false);
+			map.put("MESSAGE", "ERROR!");
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
+	}
+	
+
+	
 	
 	
 	
@@ -86,15 +112,15 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping(value="/{status}" ,method = RequestMethod.POST, headers="Accept=Application/json")
-	public ResponseEntity<Map<String , Object>> setApproveByAdmin(@PathVariable("status") int status){
+	@RequestMapping(value="/update-user-status" ,method = RequestMethod.PUT, headers="Accept=Application/json")
+	public ResponseEntity<Map<String , Object>> setChangeStatusUser(@RequestBody FormUserUpdateStatus status){
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
-			if(userService.setApproveByAdmin(status)){
-				map.put("MESSAGE", "USER HAVE BEEN APPROVE");
+			if(userService.setChangeStatusUser(status)){
+				map.put("MESSAGE", "USER HAVE BEEN DELETE");
 				map.put("STATUS", true);
 			}else{
-				map.put("MESSAGE", "NOT ADD USER");
+				map.put("MESSAGE", "NOT CANNOT BE DELETE");
 				map.put("STATUS", false);
 			}
 		}catch(Exception e){
@@ -108,7 +134,7 @@ public class UserController {
 	
 	
 	@RequestMapping(value={"/update-user"},method=RequestMethod.PUT, headers = "Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> updateUser(@RequestBody User user){
+	public ResponseEntity<Map<String, Object>> updateUser(@RequestBody FormUserUpdate user){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
 			if(userService.updateUser(user)){

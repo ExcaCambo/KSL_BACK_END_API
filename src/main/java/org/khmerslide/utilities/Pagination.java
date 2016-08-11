@@ -50,22 +50,6 @@ public class Pagination implements Serializable{
 		
 	}
 	
-	public int nextPage(){
-		return this.page+1;
-	}
-	
-	public int previousPage(){
-		return this.page-1;
-	}
-	
-	public boolean hasNextPage(){
-		return this.nextPage() <=this.totalPages()? true :false;
-	}
-	
-	public boolean hasPreviousPage(){
-		return this.previousPage()>=1 ? true : false;
-	}	
-	
 	public int offset(){
 		this.offset = (this.page-1)* limit;
 		return this.offset;
@@ -108,7 +92,7 @@ public class Pagination implements Serializable{
 	 * @return the offset
 	 */
 	public int getOffset() {
-		return offset;
+		return offset();
 	}
 
 	/**

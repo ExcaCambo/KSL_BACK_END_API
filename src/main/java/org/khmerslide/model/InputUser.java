@@ -2,6 +2,12 @@ package org.khmerslide.model;
 
 
 
+import java.beans.Encoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+
+import org.khmerslide.passwordencoder.PasswordEncoderGenerator;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class InputUser {
@@ -75,7 +81,13 @@ public class InputUser {
 			return password;
 		}
 		public void setPassword(String password) {
-			this.password = password;
+			Base64.Encoder encoder = Base64.getEncoder();
+			String encodedString = encoder.encodeToString(password.getBytes(StandardCharsets.UTF_8) );
+			System.out.println(encodedString);
+			
+			/*	PasswordEncoderGenerator  p = new PasswordEncoderGenerator();
+				p.EncoderPassword(password);*/
+				this.password= encodedString;
 		}
 		public String getPhoto() {
 			return photo;

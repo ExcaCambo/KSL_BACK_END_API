@@ -3,7 +3,6 @@ package org.khmerslide.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.khmerslide.entities.User;
 import org.khmerslide.entities.User_Type;
 import org.khmerslide.model.FormUserInput;
@@ -22,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-
 @Controller
 @RequestMapping("/api/user")
 public class UserController {
@@ -53,6 +50,29 @@ public class UserController {
 		}
 		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
 	}
+	@ResponseBody
+	@RequestMapping(value="/get-user/{id}" , method = RequestMethod.GET, headers="Accept=Application/json")
+	public ResponseEntity<Map<String , Object>> getUserById(@PathVariable("id") int id){
+		Map<String , Object> map = new HashMap<String,Object>();
+		try{
+			ArrayList<User> users = userService.getUserById(id);
+			if(!users.isEmpty()){
+				map.put("DATA", users);
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA FOUND!");
+			}else{
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA NOT FOUND!");
+			}
+		}catch(Exception e){
+			map.put("STATUS", false);
+			map.put("MESSAGE", "ERROR!");
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
+	}
+	
+
 	
 	@ResponseBody
 	@RequestMapping(value="/get-user-by-id/{user_id}",method=RequestMethod.GET, headers="Accept=Application/json")

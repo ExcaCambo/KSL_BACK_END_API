@@ -10,6 +10,8 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.khmerslide.entities.User;
+import org.khmerslide.model.FormUserUpdate;
+import org.khmerslide.model.FormUserUpdateStatus;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -20,7 +22,7 @@ public interface UserRepositories {
 		2.disactive
 		3.delete
 	*/
-	String G_USER="SELECT"
+	String R_USER="SELECT"
 				+" U.user_id,"
 				+" U.user_name,"
 				+" U.gender,"
@@ -34,14 +36,37 @@ public interface UserRepositories {
 				+" FROM "
 				+" ksl_user U"
 				+" INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id"
-				+" WHERE U.status =1";
-	@Select(G_USER)
+				+" WHERE U.status !=3";
+	@Select(R_USER)
 	@Results(value={
 			@Result(property="role.role_name", column="role_name")
 	})
 	public ArrayList<User> getUser();
+	
+	String R_USERBYID="SELECT"
+			+" U.user_id,"
+			+" U.user_name,"
+			+" U.gender,"
+			+" U.email,"
+			+" U.password,"
+			+" U.registered_date,"
+			+" U.photo,"
+			+" U.description,"
+			+" U.status,"
+			+" ut.role_name,"
+			+" ut.role_id"
+			+" FROM "
+			+" ksl_user U"
+			+" INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id"
+			+" WHERE U.user_id =#{id}";
+@Select(R_USERBYID)
+@Results(value={
+		@Result(property="role.role_id", column="role_id"),
+		@Result(property="role.role_name", column="role_name")
+})
+public ArrayList<User> getUserById(int id);
 
-	String A_USER="INSERT INTO "
+	String C_USER="INSERT INTO "
 					+ "ksl_user("
 					+ "user_name,"
 					+ "gender,"
@@ -60,7 +85,7 @@ public interface UserRepositories {
 					+ "#{registered_date},"
 					+ "#{status},"
 					+ "#{role.role_id})"; 
-	@Insert(A_USER)
+	@Insert(C_USER)
 	public boolean addUser(User user);
 	
 	
@@ -69,27 +94,32 @@ public interface UserRepositories {
 	String UABA="UPDATE ksl_user "
 			+ " SET"
 			+ " status=#{status}"
-			+ " WHERE stutus = 2 "
-			+ " AND"
-			+ " user_id =#{user_id}";
+			+ " WHERE user_id =#{user_id}";
 	@Update(UABA)
-	public boolean setApproveByAdmin(int status);
+//	@Results(value={
+//			@Result(property="user_id", column="user_id"),
+//			@Result(property="status", column="status")
+//	})
+	public boolean setChangeStatusUser(FormUserUpdateStatus status);
 	
 	
 	String U_USER="UPDATE ksl_user "
 					+ "SET "
 					+ "user_name=#{user_name},"
-					+ "gender=#{gender},"
+//					+ "gender=#{gender},"
 					+ "email=#{email},"
-					+ "registered_date=#{registered_date},"
-					+ "photo=#{photo},"
-					+ "description=#{description},"
+//					+ "registered_date=#{registered_date},"
+//					+ "photo=#{photo},"
+//					+ "description=#{description},"
 					+ "status=#{status},"
-					+ "role_id=#{role_id.role_id} "
+					+ "role_id=#{role_id} "
 					+ "WHERE "
 					+ "user_id=#{user_id}";
 	@Update(U_USER)
-	public boolean updateUser(User user);
+	@Results(value={
+			@Result(property="role_id", column="role_id")
+	})
+	public boolean updateUser(FormUserUpdate user);
 
 	String D_USER="DELETE FROM "
 					+ "ksl_user "

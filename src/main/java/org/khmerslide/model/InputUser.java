@@ -11,7 +11,7 @@ public class InputUser {
 	private String registered_date;
 	private String photo;
 	private String description;
-	private int status = 2;
+	private int status;
 	private User_Type role;
 	
 	public User_Type getRole() {

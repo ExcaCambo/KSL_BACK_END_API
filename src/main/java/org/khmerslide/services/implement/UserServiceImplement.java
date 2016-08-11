@@ -3,6 +3,8 @@ package org.khmerslide.services.implement;
 import java.util.ArrayList;
 
 import org.khmerslide.entities.User;
+import org.khmerslide.model.FormUserUpdate;
+import org.khmerslide.model.FormUserUpdateStatus;
 import org.khmerslide.repositories.UserRepositories;
 import org.khmerslide.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +20,27 @@ public class UserServiceImplement implements UserService{
 	}
 	@Override
 	public boolean addUser(User user) {
-		user.setStatus(2);
+		
 		return userRepository.addUser(user);
 	}
 	@Override
-	public boolean updateUser(User user) {
+	public boolean updateUser(FormUserUpdate user) {
 		return userRepository.updateUser(user);
 	}
 	@Override
 	public boolean deleteUser(int id) {
 		return userRepository.deleteUser(id);
 	}
+
 	@Override
-	public boolean setApproveByAdmin(int status) {
-		return userRepository.setApproveByAdmin(status);
+	public ArrayList<User> getUserById(int id) {
+		// TODO Auto-generated method stub
+		return userRepository.getUserById(id);
+	}
+	@Override
+	public boolean setChangeStatusUser(FormUserUpdateStatus status) {
+		// TODO Auto-generated method stub
+		return userRepository.setChangeStatusUser(status);
 	}
 
 }

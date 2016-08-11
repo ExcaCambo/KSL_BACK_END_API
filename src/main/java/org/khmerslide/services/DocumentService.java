@@ -7,7 +7,8 @@ import org.khmerslide.entities.User;
 import org.khmerslide.utilities.Pagination;
 
 public interface DocumentService {
-	public ArrayList<Document> getDocument(Pagination pagination);
+	public ArrayList<Document> getDocument(Pagination pagination,String doc_type);
+	public ArrayList<Document> getDocumentType(Pagination pagination,String doc_type);
 	public boolean addDocument(Document document);
 	public boolean updateDocument(Document document);
 	public boolean deleteDocument(int doc_id);

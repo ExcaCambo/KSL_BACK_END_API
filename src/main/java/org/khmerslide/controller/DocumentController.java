@@ -31,13 +31,13 @@ public class DocumentController {
 	
 	@ResponseBody
 	@RequestMapping(value={"/get-document"},method=RequestMethod.GET,headers="Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> getDocument(@RequestParam("page") int page, @RequestParam("limit") int limit){
+	public ResponseEntity<Map<String, Object>> getDocument(@RequestParam("page") int page, @RequestParam("limit") int limit,@RequestParam("doc_type") String doc_type){
 		Map<String , Object> map = new HashMap<String , Object>();
 		Pagination pagination = new Pagination();
 		pagination.setPage(page);
 		pagination.setLimit(limit);
 		try{
-			ArrayList<Document> docs = documentService.getDocument(pagination);
+			ArrayList<Document> docs = documentService.getDocument(pagination,doc_type);
 			if(!docs.isEmpty()){
 				map.put("DATA", docs);
 				map.put("STATUS", true);
@@ -54,11 +54,37 @@ public class DocumentController {
 		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
 	}
 	@ResponseBody
-	@RequestMapping(value={"/get-document/{doc_id}"},method=RequestMethod.GET,headers="Accept=Application/json")
+	@RequestMapping(value={"/get-document-by-type/{doc_id}"},method=RequestMethod.GET,headers="Accept=Application/json")
 	public ResponseEntity<Map<String, Object>> getDocumentById(@PathVariable("doc_id") int doc_id){
 		Map<String , Object> map = new HashMap<String , Object>();
+		
 		try{
 			ArrayList<Document> docs = documentService.getDocumentById(doc_id);
+			if(!docs.isEmpty()){
+				map.put("DATA", docs);
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA FOUND!");
+			}else{
+				map.put("STATUS", true);
+				map.put("MESSAGE", "DATA NOT FOUND!");
+			}
+		}catch(Exception e){
+			map.put("STATUS", false);
+			map.put("MESSAGE", "ERROR!");
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value={"/get-document/{doc_type}"},method=RequestMethod.GET,headers="Accept=Application/json")
+	public ResponseEntity<Map<String, Object>> getDocumentByType(@RequestParam("page") int page, @RequestParam("limit") int limit,@PathVariable("doc_id") String doc_type){
+		Map<String , Object> map = new HashMap<String , Object>();
+		Pagination pagination = new Pagination();
+		pagination.setPage(page);
+		pagination.setLimit(limit);
+		try{
+			ArrayList<Document> docs = documentService.getDocumentType(pagination,doc_type);
 			if(!docs.isEmpty()){
 				map.put("DATA", docs);
 				map.put("STATUS", true);

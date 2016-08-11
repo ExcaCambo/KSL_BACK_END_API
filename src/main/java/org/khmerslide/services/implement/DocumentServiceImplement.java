@@ -2,6 +2,8 @@ package org.khmerslide.services.implement;
 
 import java.util.ArrayList;
 
+import javax.xml.crypto.dom.DOMCryptoContext;
+
 import org.khmerslide.entities.Document;
 import org.khmerslide.repositories.DocumentRepository;
 import org.khmerslide.services.DocumentService;
@@ -15,8 +17,8 @@ public class DocumentServiceImplement implements DocumentService {
 	private DocumentRepository documentRepository;
 
 	@Override
-	public ArrayList<Document> getDocument(Pagination pagination) {
-		return documentRepository.getDocument(pagination);
+	public ArrayList<Document> getDocument(Pagination pagination,String doc_type) {
+		return documentRepository.getDocument(pagination,doc_type);
 	}
 	@Override
 	public boolean addDocument(Document document) {
@@ -35,6 +37,10 @@ public class DocumentServiceImplement implements DocumentService {
 	@Override
 	public ArrayList<Document> getDocumentById(int doc_id) {
 		return documentRepository.getDocumentById(doc_id);
+	}
+	@Override
+	public ArrayList<Document> getDocumentType(Pagination pagination,String doc_type) {
+		return documentRepository.getDocumentType(pagination,doc_type);
 	}
 
 }

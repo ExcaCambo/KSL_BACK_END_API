@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.khmerslide.entities.Save_List;
+import org.khmerslide.utilities.Pagination;
 import org.springframework.stereotype.Repository;
 @Repository
 public interface SaveListRepository {
@@ -29,13 +31,15 @@ public interface SaveListRepository {
 			+" INNER JOIN ksl_user U ON  S.user_id = U.user_id"
 			+" INNER JOIN ksl_document D ON S.doc_id = D.doc_id"
 			+" WHERE"
-			+" S.status = 1";
+			+" S.status = 1"
+			+" LIMIT #{pagination.limit}"
+			+" OFFSET #{pagination.offset}";
 	@Select(G_SL)
 	@Results(value={
 			@Result(property="user.user_name",column="user_name"),
 			@Result(property="doc.doc_name",column="doc_name")
 	})
-	public ArrayList<Save_List> getSaveList();
+	public ArrayList<Save_List> getSaveList(@Param("pagination") Pagination pagination);
 	
 	
 	String G_SLBI="SELECT"

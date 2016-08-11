@@ -11,6 +11,7 @@ import org.khmerslide.entities.User;
 import org.khmerslide.model.InputDocument;
 import org.khmerslide.model.InputSave_List;
 import org.khmerslide.services.SaveListService;
+import org.khmerslide.utilities.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
@@ -31,10 +33,13 @@ public class SaveListController {
 	
 	@ResponseBody
 	@RequestMapping(value={"/get-getsavelist"},method=RequestMethod.GET,headers="Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> getSaveListById(){
+	public ResponseEntity<Map<String, Object>> getSaveListById(@RequestParam("page") int page, @RequestParam("limit") int limit){
 		Map<String , Object> map = new HashMap<String , Object>();
+		Pagination pagination = new Pagination();
+		pagination.setPage(page);
+		pagination.setLimit(limit);
 		try{
-			ArrayList<Save_List> savelist = savelistService.getSaveList();
+			ArrayList<Save_List> savelist = savelistService.getSaveList(pagination);
 			if(!savelist.isEmpty()){
 				map.put("DATA", savelist);
 				map.put("STATUS", true);

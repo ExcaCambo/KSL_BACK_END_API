@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.khmerslide.entities.Document;
 import org.khmerslide.repositories.DocumentRepository;
 import org.khmerslide.services.DocumentService;
+import org.khmerslide.utilities.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,8 @@ public class DocumentServiceImplement implements DocumentService {
 	private DocumentRepository documentRepository;
 
 	@Override
-	public ArrayList<Document> getDocument() {
-		return documentRepository.getDocument();
+	public ArrayList<Document> getDocument(Pagination pagination) {
+		return documentRepository.getDocument(pagination);
 	}
 	@Override
 	public boolean addDocument(Document document) {

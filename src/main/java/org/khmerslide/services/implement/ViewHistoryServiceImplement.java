@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.khmerslide.entities.View_History;
 import org.khmerslide.repositories.ViewHistoryRepository;
 import org.khmerslide.services.ViewHistoryService;
+import org.khmerslide.utilities.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +14,8 @@ public class ViewHistoryServiceImplement implements ViewHistoryService {
 	@Autowired
 	private ViewHistoryRepository  viewhistoryRepository;
 	@Override
-	public ArrayList<View_History> getViewHistory() {
-		return viewhistoryRepository.getViewHistory();
+	public ArrayList<View_History> getViewHistory(Pagination pagination) {
+		return viewhistoryRepository.getViewHistory(pagination);
 	}
 
 	@Override

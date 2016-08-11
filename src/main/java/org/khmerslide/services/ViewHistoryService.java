@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 import org.khmerslide.entities.User;
 import org.khmerslide.entities.View_History;
+import org.khmerslide.utilities.Pagination;
 
 public interface ViewHistoryService {
-	public ArrayList<View_History> getViewHistory();
+	public ArrayList<View_History> getViewHistory(Pagination pagination);
 	public boolean addViewHistory(View_History vh);
 	public boolean updateViewHistory(View_History vh);
 	public boolean deleteViewHistory(int vh_id);

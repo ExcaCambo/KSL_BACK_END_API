@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.khmerslide.entities.Comment;
 import org.khmerslide.repositories.CommentRepository;
 import org.khmerslide.services.CommentService;
+import org.khmerslide.utilities.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +14,8 @@ public class CommentServiceImplement implements CommentService{
 	@Autowired
 	private CommentRepository  commentRepository;
 	@Override
-	public ArrayList<Comment> getComment() {
-		return commentRepository.getComment();
+	public ArrayList<Comment> getComment(Pagination pagination) {
+		return commentRepository.getComment(pagination);
 	}
 
 	@Override

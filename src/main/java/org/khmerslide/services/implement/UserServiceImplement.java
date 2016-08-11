@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.khmerslide.entities.User;
 import org.khmerslide.repositories.UserRepositories;
 import org.khmerslide.services.UserService;
+import org.khmerslide.utilities.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +14,8 @@ public class UserServiceImplement implements UserService{
 	@Autowired 
 	private UserRepositories userRepository;
 	@Override
-	public ArrayList<User> getUser() {
-		return userRepository.getUser();
+	public ArrayList<User> getUser(Pagination pagination) {
+		return userRepository.getUser(pagination);
 	}
 	@Override
 	public boolean addUser(User user) {

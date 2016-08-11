@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.khmerslide.entities.User;
+import org.khmerslide.utilities.Pagination;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -35,12 +36,14 @@ public interface UserRepositories {
 				+" ksl_user U"
 				+" INNER JOIN ksl_user_type ut ON U.role_id = ut.role_id"
 				+" WHERE"
-				+" U.status=1";
+				+" U.status=1"
+				+" LIMIT #{pagination.limit}"
+				+" OFFSET #{pagination.offset}";
 	@Select(G_USER)
 	@Results(value={
 			@Result(property="role.role_name", column="role_name")
 	})
-	public ArrayList<User> getUser();
+	public ArrayList<User> getUser(@Param("pagination") Pagination pagination);
 
 	
 		String G_BID="SELECT"

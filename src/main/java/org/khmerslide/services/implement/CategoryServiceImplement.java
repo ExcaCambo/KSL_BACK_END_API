@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.khmerslide.entities.Category;
 import org.khmerslide.repositories.CategoryRepository;
 import org.khmerslide.services.CategoryService;
+import org.khmerslide.utilities.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,8 @@ public class CategoryServiceImplement implements CategoryService{
 	@Autowired
 	private CategoryRepository  categoryRepository;
 	@Override
-	public ArrayList<Category> getCategory() {
-		return categoryRepository.getCategory();
+	public ArrayList<Category> getCategory(Pagination pagination) {
+		return categoryRepository.getCategory(pagination);
 	}
 
 	@Override

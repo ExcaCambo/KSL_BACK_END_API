@@ -1,15 +1,16 @@
 package org.khmerslide.repositories;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.khmerslide.entities.Category;
+import org.khmerslide.utilities.Pagination;
 import org.springframework.stereotype.Repository;
 @Repository
 public interface CategoryRepository {
@@ -30,13 +31,15 @@ public interface CategoryRepository {
 			 +" FROM  ksl_category C" 
 			 +" FULL JOIN ksl_category CB ON C.cat_id = CB.parent_id" 
 			 +" FULL JOIN ksl_user U ON U.user_id= CB.user_id" 
-			 +" WHERE CB.status !=3";
+			 +" WHERE CB.status !=3 "
+			 + "LIMIT #{pagination.limit} "
+			 + "OFFSET #{pagination.offset}";
 	@Select(G_C)
 	@Results(value={
 			@Result(property="user.user_name", column="user_name"),
 			@Result(property="parent.cat_name", column="PARENT")
 	})
-	public ArrayList<Category> getCategory();
+	public ArrayList<Category> getCategory(@Param("pagination") Pagination pagination);
 	
 	String G_CBI="SELECT"
 			 +" CB.cat_id,"

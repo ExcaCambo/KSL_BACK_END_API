@@ -11,6 +11,7 @@ import org.khmerslide.entities.View_History;
 import org.khmerslide.model.InputView_History;
 import org.khmerslide.model.InputView_History.UpdateViewHistory;
 import org.khmerslide.services.ViewHistoryService;
+import org.khmerslide.utilities.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -28,10 +30,13 @@ public class ViewHistoryController {
 	private ViewHistoryService  viewhistoryService;
 	@ResponseBody
 	@RequestMapping(value={"/get-viewhistory"},method=RequestMethod.GET,headers="Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> getViewHistory(){
+	public ResponseEntity<Map<String, Object>> getViewHistory(@RequestParam("page") int page, @RequestParam("limit") int limit){
 		Map<String , Object> map = new HashMap<String , Object>();
+		Pagination pagination = new Pagination();
+		pagination.setPage(page);
+		pagination.setLimit(limit);
 		try{
-			ArrayList<View_History> vh = viewhistoryService.getViewHistory();
+			ArrayList<View_History> vh = viewhistoryService.getViewHistory(pagination);
 			if(!vh.isEmpty()){
 				map.put("DATA", vh);
 				map.put("STATUS", true);

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.khmerslide.entities.Save_List;
 import org.khmerslide.repositories.SaveListRepository;
 import org.khmerslide.services.SaveListService;
+import org.khmerslide.utilities.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 @Service
@@ -13,8 +14,8 @@ public class SaveListImplement implements  SaveListService {
 	@Autowired
 	private SaveListRepository  savelistRepository;
 	@Override
-	public ArrayList<Save_List> getSaveList() {
-		return savelistRepository.getSaveList();
+	public ArrayList<Save_List> getSaveList(Pagination pagination) {
+		return savelistRepository.getSaveList(pagination);
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import org.khmerslide.entities.Category;
 import org.khmerslide.entities.User;
 import org.khmerslide.model.InputCategory;
 import org.khmerslide.services.CategoryService;
+import org.khmerslide.utilities.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -27,10 +29,13 @@ public class CategoryController {
 	
 	@ResponseBody
 	@RequestMapping(value={"/get-category"},method=RequestMethod.GET,headers="Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> getCategory(){
+	public ResponseEntity<Map<String, Object>> getCategory(@RequestParam("page") int page, @RequestParam("limit") int limit){
 		Map<String , Object> map = new HashMap<String , Object>();
+		Pagination pagination = new Pagination();
+		pagination.setPage(page);
+		pagination.setLimit(limit);
 		try{
-			ArrayList<Category> cateogry = categoryService.getCategory();
+			ArrayList<Category> cateogry = categoryService.getCategory(pagination);
 			if(!cateogry.isEmpty()){
 				map.put("DATA", cateogry);
 				map.put("STATUS", true);

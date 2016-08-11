@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.khmerslide.entities.Comment;
+import org.khmerslide.utilities.Pagination;
 import org.springframework.stereotype.Repository;
 
 import scala.sys.process.processInternal;
@@ -30,13 +32,15 @@ public interface CommentRepository {
 			+" ksl_comment C"
 			+" FULL JOIN ksl_user U ON C.user_id = U.user_id"
 			+" FULL JOIN ksl_document D ON C.doc_id = D.doc_id"
-			+" WHERE C.status = 1 ";
+			+" WHERE C.status = 1"
+			+" LIMIT #{pagination.limit}"
+			+" OFFSET #{pagination.offset}";
 	@Select(G_CM)
 	@Results(value={
 			@Result(property="user.user_name",column="user_name"),
 			@Result(property="doc.doc_title",column="doc_title")
 	})
-	public ArrayList<Comment> getComment();
+	public ArrayList<Comment> getComment(@Param("pagination") Pagination pagination);
 	
 	
 	String G_CMBI="SELECT" 

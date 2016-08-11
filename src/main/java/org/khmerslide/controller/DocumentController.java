@@ -10,6 +10,7 @@ import org.khmerslide.entities.Document;
 import org.khmerslide.entities.User;
 import org.khmerslide.model.InputDocument;
 import org.khmerslide.services.DocumentService;
+import org.khmerslide.utilities.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -29,10 +31,13 @@ public class DocumentController {
 	
 	@ResponseBody
 	@RequestMapping(value={"/get-document"},method=RequestMethod.GET,headers="Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> getDocument(){
+	public ResponseEntity<Map<String, Object>> getDocument(@RequestParam("page") int page, @RequestParam("limit") int limit){
 		Map<String , Object> map = new HashMap<String , Object>();
+		Pagination pagination = new Pagination();
+		pagination.setPage(page);
+		pagination.setLimit(limit);
 		try{
-			ArrayList<Document> docs = documentService.getDocument();
+			ArrayList<Document> docs = documentService.getDocument(pagination);
 			if(!docs.isEmpty()){
 				map.put("DATA", docs);
 				map.put("STATUS", true);

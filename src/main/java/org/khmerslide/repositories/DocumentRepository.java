@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.khmerslide.entities.Document;
+import org.khmerslide.utilities.Pagination;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -39,14 +41,16 @@ public interface DocumentRepository {
 			+" FULL JOIN ksl_category ct ON d.cat_id = ct.cat_id"
 			+" FULL JOIN ksl_user u ON d.user_id = u.user_id"
 			+" WHERE"
-			+" d.status = 1 ";
+			+" d.status = 1"
+			+ "LIMIT #{pagination.limit}"
+			+ "OFFSET #{pagination.offset}";
 	@Select(G_DOC)
 	@Results(value={
 			@Result(property="doc.doc_name",column="doc_name"),
 			@Result(property="user.user_name",column="user_name"),
 			@Result(property="cat.cat_name",column="cat_name")
 	})
-	public ArrayList<Document> getDocument();
+	public ArrayList<Document> getDocument(@Param("pagination") Pagination pagination);
 	
 	
 	String G_DOCBI="SELECT" 

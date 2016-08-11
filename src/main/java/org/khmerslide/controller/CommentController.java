@@ -13,6 +13,7 @@ import org.khmerslide.model.InputComment;
 import org.khmerslide.model.InputComment.UpdateComment;
 import org.khmerslide.model.InputCategory;
 import org.khmerslide.services.CommentService;
+import org.khmerslide.utilities.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -30,10 +32,13 @@ public class CommentController {
 	private CommentService commentService;
 	@ResponseBody
 	@RequestMapping(value={"/get-comment"},method=RequestMethod.GET,headers="Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> getComment(){
+	public ResponseEntity<Map<String, Object>> getComment(@RequestParam("page") int page, @RequestParam("limit") int limit){
 		Map<String , Object> map = new HashMap<String , Object>();
+		Pagination pagination = new Pagination();
+		pagination.setPage(page);
+		pagination.setLimit(limit);
 		try{
-			ArrayList<Comment> comment = commentService.getComment();
+			ArrayList<Comment> comment = commentService.getComment(pagination);
 			if(!comment.isEmpty()){
 				map.put("DATA", comment);
 				map.put("STATUS", true);

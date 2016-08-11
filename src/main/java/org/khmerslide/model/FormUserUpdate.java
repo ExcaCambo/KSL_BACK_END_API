@@ -5,7 +5,7 @@ package org.khmerslide.model;
 public class FormUserUpdate {
 	private int user_id; 
 	private String user_name;
-	private String email;
+	private String gender;
 	private String password;
 	private int status;
 	private int role_id;
@@ -32,11 +32,11 @@ public class FormUserUpdate {
 		this.user_name = user_name;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getGender() {
+		return gender;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	public String getPassword() {
 		return password;

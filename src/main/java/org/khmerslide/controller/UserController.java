@@ -9,7 +9,6 @@ import org.khmerslide.entities.User_Type;
 import org.khmerslide.model.FormUserInput;
 import org.khmerslide.model.FormUserUpdate;
 import org.khmerslide.model.FormUserUpdateStatus;
-import org.khmerslide.model.InputUser;
 import org.khmerslide.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

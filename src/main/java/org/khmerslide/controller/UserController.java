@@ -6,9 +6,11 @@ import java.util.Map;
 
 import org.khmerslide.entities.User;
 import org.khmerslide.entities.User_Type;
+import org.khmerslide.model.FormUserInput;
+import org.khmerslide.model.FormUserUpdate;
+import org.khmerslide.model.FormUserUpdateStatus;
 import org.khmerslide.model.InputUser;
 import org.khmerslide.services.UserService;
-import org.khmerslide.utilities.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+//idovbcb
 
 @Controller
 @RequestMapping("/api/user")
@@ -28,13 +30,10 @@ public class UserController {
 	private UserService  userService;
 	@ResponseBody
 	@RequestMapping(value={"/get-user"},method=RequestMethod.GET, headers="Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> getUser(@RequestParam("page") int page, @RequestParam("limit") int limit){
+	public ResponseEntity<Map<String, Object>> getUser(){
 		Map<String , Object> map = new HashMap<String , Object>();
-		Pagination pagination = new Pagination();
-		pagination.setPage(page);
-		pagination.setLimit(limit);
 		try{
-			ArrayList<User> users = userService.getUser(pagination);
+			ArrayList<User> users = userService.getUser();
 			if(!users.isEmpty()){
 				map.put("DATA", users);
 				map.put("STATUS", true);
@@ -52,18 +51,17 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/get-user-by-id/{user_id}",method=RequestMethod.GET, headers="Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> getUserById(@PathVariable("user_id") int user_id){
-		Map<String , Object> map = new HashMap<String , Object>();
+	@RequestMapping(value="/get-user/{id}" , method = RequestMethod.GET, headers="Accept=Application/json")
+	public ResponseEntity<Map<String , Object>> getUserById(@PathVariable("id") int id){
+		Map<String , Object> map = new HashMap<String,Object>();
 		try{
-			ArrayList<User> user = userService.getUserById(user_id);
-			
-			if(!user.isEmpty()){
-				map.put("DATA", user);
+			ArrayList<User> users = userService.getUserById(id);
+			if(!users.isEmpty()){
+				map.put("DATA", users);
 				map.put("STATUS", true);
 				map.put("MESSAGE", "DATA FOUND!");
 			}else{
-				map.put("STATUS", false);
+				map.put("STATUS", true);
 				map.put("MESSAGE", "DATA NOT FOUND!");
 			}
 		}catch(Exception e){
@@ -74,23 +72,27 @@ public class UserController {
 		return new ResponseEntity<Map<String, Object>>(map ,HttpStatus.OK) ;
 	}
 	
+
+	
+	
+	
 	
 	
 	@RequestMapping(value={"/add-user"},method = RequestMethod.POST, headers="Accept=Application/json")
-	public ResponseEntity<Map<String , Object>> addUser(@RequestBody InputUser.InsertUser user){
+	public ResponseEntity<Map<String , Object>> addUser(@RequestBody FormUserInput inputUser){
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
 			User u = new User();
-			u.setUser_name(user.getUser_name());
-			u.setGender(user.getGender());
-			u.setEmail(user.getEmail());
-			u.setPassword(user.getPassword());
-			u.setRegistered_date(user.getRegistered_date());
-			u.setPhoto(user.getPhoto());
-			u.setDescription(user.getDescription());
-			u.setStatus(user.getStatus());
+			u.setUser_name(inputUser.getUser_name());
+			u.setGender(inputUser.getGender());
+			u.setEmail(inputUser.getEmail());
+			u.setPassword(inputUser.getPassword());
+			u.setPhoto(inputUser.getPhoto());
+			u.setRegistered_date(inputUser.getRegistered_date());
+		
+			u.setStatus(inputUser.getStatus());			
 			User_Type  ut = new User_Type();
-					ut.setRole_id(user.getRole());
+					ut.setRole_id(inputUser.getRole_id());
 			u.setRole(ut);
 			
 			if(userService.addUser(u)){
@@ -109,22 +111,33 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(value={"/update-user/{user_id}"},method=RequestMethod.PUT, headers = "Accept=Application/json")
-	public ResponseEntity<Map<String, Object>> updateUser(@PathVariable("user_id") int user_id,@RequestBody InputUser.UpdateUser updateuser){
+	
+	@RequestMapping(value="/update-user-status" ,method = RequestMethod.PUT, headers="Accept=Application/json")
+	public ResponseEntity<Map<String , Object>> setChangeStatusUser(@RequestBody FormUserUpdateStatus status){
+		Map<String,Object> map = new HashMap<String, Object>();
+		try{
+			if(userService.setChangeStatusUser(status)){
+				map.put("MESSAGE", "USER HAVE BEEN DELETE");
+				map.put("STATUS", true);
+			}else{
+				map.put("MESSAGE", "NOT CANNOT BE DELETE");
+				map.put("STATUS", false);
+			}
+		}catch(Exception e){
+			map.put("MESSAGE", "Error!");
+			map.put("STATUS", false);
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Map<String,Object>>(map , HttpStatus.OK);
+		
+	}
+	
+	
+	@RequestMapping(value={"/update-user"},method=RequestMethod.PUT, headers = "Accept=Application/json")
+	public ResponseEntity<Map<String, Object>> updateUser(@RequestBody FormUserUpdate user){
 		Map<String, Object> map = new HashMap<String , Object>();
 		try{
-			User U = new User();
-			U.setUser_id(user_id);
-			U.setUser_name(updateuser.getUser_name());
-			U.setGender(updateuser.getGender());
-			U.setEmail(updateuser.getEmail());
-			U.setPassword(updateuser.getPassword());
-			U.setPhoto(updateuser.getPhoto());
-			U.setDescription(updateuser.getDescription());
-				User_Type  ut =new User_Type();
-					ut.setRole_id(updateuser.getRole());
-			U.setRole(ut);
-			if(userService.updateUser(U)){
+			if(userService.updateUser(user)){
 				map.put("MESSAGE", "USER UPDATE");
 				map.put("STATUS", true);
 			}else{
@@ -139,11 +152,11 @@ public class UserController {
 		return new ResponseEntity<Map<String,Object>>(map , HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/delete-user/{user_id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
-	public ResponseEntity<Map<String , Object>> deleteUser(@PathVariable("user_id") int user_id){
+	@RequestMapping(value="/delete-user/{id}" , method = RequestMethod.DELETE, headers="Accept=Application/json")
+	public ResponseEntity<Map<String , Object>> deleteUser(@PathVariable("id") int id){
 		Map<String , Object> map = new HashMap<String,Object>();
 		try{
-			if(userService.deleteUser(user_id)){
+			if(userService.deleteUser(id)){
 				map.put("MESSAGE", "USER DELETE");
 				map.put("STATUS" , true);
 			}else{
@@ -158,5 +171,4 @@ public class UserController {
 		return new ResponseEntity<Map<String,Object>>(map , HttpStatus.OK);
 	}
 	
-}	
-
+}

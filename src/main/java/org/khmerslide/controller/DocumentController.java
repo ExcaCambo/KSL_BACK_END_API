@@ -122,6 +122,7 @@ public class DocumentController {
 			doc.setUser(u);
 				Category c = new Category();
 					c.setCat_id(document.getCat_id());
+			doc.setCat(c);
 			doc.setThumbnail(document.getThumbnail());
 			doc.setSource(document.getSource());
 			

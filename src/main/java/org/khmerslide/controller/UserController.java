@@ -6,6 +6,9 @@ import java.util.Map;
 
 import org.khmerslide.entities.User;
 import org.khmerslide.entities.User_Type;
+import org.khmerslide.model.FormUserInput;
+import org.khmerslide.model.FormUserUpdate;
+import org.khmerslide.model.FormUserUpdateStatus;
 import org.khmerslide.model.InputUser;
 import org.khmerslide.services.UserService;
 import org.khmerslide.utilities.Pagination;
